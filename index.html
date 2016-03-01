@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css" />
+		<style type="text/css">
+			html {
+				height: 100%;
+			}
+			
+			body {
+				background-color: grey;
+				min-width: 1024px;
+				height: inherit;
+				overflow-y: hidden;
+			}
+			
+			.header {
+				min-width: 1024px;
+			}
+			
+			.mainPart {
+				height: inherit;
+				padding: 0px;
+				overflow: hidden;
+			}
+			
+			.imgLun {
+				height: inherit;
+			}
+			
+			.list {
+				height: inherit;
+				background-image: url(img/pic1.png);
+				background-repeat: no-repeat;
+				background-size: cover;
+				opacity: 1;
+			}
+			
+			.list>img {
+				position: relative;
+				z-index: -1;
+				display: none;
+			}
+			/*.list img:nth-child(2) {
+				display: block;
+			}*/
+			
+			.buttons {
+				position: absolute;
+				z-index: 2;
+				bottom: 10%;
+				left: 85%;
+			}
+			
+			.buttons span {
+				cursor: pointer;
+				float: left;
+				width: 13px;
+				height: 13px;
+				border-radius: 50%;
+				background: white;
+				margin-right: 10px;
+			}
+			
+			.buttons .on {
+				background: orange;
+			}
+			
+			.select>li {
+				float: left;
+				list-style-type: none;
+			}
+			
+			.select a {
+				padding: 15px;
+				text-decoration: none;
+				font-family: "微软雅黑";
+				font-size: 16px;
+				color: white;
+			}
+			
+			.select a:hover {
+				color: black;
+				background-color: transparent!important;
+			}
+			
+			.select li:hover {
+				display: block;
+			}
+			
+			.select:nth-last-child(1) {
+				padding-right: 30px;
+			}
+			
+			small {
+				display: block;
+			}
+			
+			.picMask {
+				position: absolute;
+				box-sizing: border-box;
+				padding: 0px;
+				width: 100%;
+				height: 100%;
+				background: url(img/mask.png) repeat scroll top left;
+			}
+			
+			.list {
+				overflow: hidden;
+				padding: 0px;
+			}
+			
+			.logo {
+				position: relative;
+				z-index: 2;
+			}
+			
+			.logo>li {
+				list-style-type: none;
+			}
+			
+			.logo a {
+				text-decoration: none;
+				color: white;
+				font-size: 16px;
+				font-family: "微软雅黑";
+			}
+			
+			.logo span {
+				display: inline-block;
+				vertical-align: middle;
+			}
+			
+			.topNav {
+				position: absolute;
+				top: 0;
+				min-width: 1024px;
+				z-index: 6;
+				padding-top: 11px;
+				overflow: hidden;
+				padding-right: 0px;
+			}
+			
+			.mask {
+				position: absolute;
+				top: 0px;
+				padding: 0px;
+				box-sizing: border-box;
+				width: 100%;
+				width: -webkit-calc(100%);
+				width: -moz-calc(100% - (10px + 5px) * 2);
+				height: 100%;
+				background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
+				background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
+				background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.4)), to(transparent));
+				background: -o-linear-gradient(top, rgba(0, 0, 0, 0.4), transparent);
+				-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#55333333, endColorstr=#00000000)";
+			}
+			
+			#title {
+				letter-spacing: 8px;
+			}
+			
+			#subTitle {
+				letter-spacing: normal;
+				display: inline;
+			}
+			
+			.secondItem {
+				list-style-type: none;
+				text-decoration: none;
+				color: white;
+				font-size: 16px;
+				font-family: "微软雅黑";
+				padding: 0px;
+				text-align: center;
+				display: none;
+			}
+			
+			.secondItem li {
+				padding-top: 20px;
+			}
+			
+			.secondItem li:hover {
+				cursor: pointer;
+				color: black;
+			}
+			/*蜂巢*/
+			
+			.beeItem {
+				position: absolute;
+				z-index: 60;
+				top: 20%;
+				left: 30%;
+				display: block;
+			}
+			
+			ul,
+			ul li {
+				list-style: none;
+			}
+			
+			.clear {
+				clear: both;
+			}
+			.background {
+				display: inline-block;
+			}
+			.box {
+				position: relative;
+				width: 630px;
+				z-index: 6;
+				display: none;
+			}
+			
+			.lineF,
+			.lineS {
+				position: absolute;
+				visibility: visible;
+				z-index: 5;
+			}
+			
+			.lineS {
+				top: 172px;
+				left: 100px;
+			}
+			
+			.boxF,
+			.boxS,
+			.boxT,
+			.overlay {
+				width: 200px;
+				height: 250px;
+				overflow: hidden;
+			}
+			
+			.boxF,
+			.boxS {
+				visibility: hidden;
+			}
+			
+			.boxF {
+				transform: rotate(120deg);
+				float: left;
+				margin-left: 0px;
+				-ms-transform: rotate(120deg);
+				-moz-transform: rotate(120deg);
+				-webkit-transform: rotate(120deg);
+			}
+			
+			.boxS {
+				transform: rotate(-60deg);
+				-ms-transform: rotate(-60deg);
+				-moz-transform: rotate(-60deg);
+				-webkit-transform: rotate(-60deg);
+			}
+			
+			.boxT {
+				transform: rotate(-60deg);
+				background: no-repeat 50% center;
+				background-size: cover;
+				-ms-transform: rotate(-60deg);
+				-moz-transform: rotate(-60deg);
+				-webkit-transform: rotate(-60deg);
+				visibility: visible;
+			}
+			
+			.overlay {
+				transition: all 250ms ease-in-out 0s;
+				display: inline-block;
+				position: absolute;
+				z-index: 7;
+				text-align: center;
+				top: 0px;
+			}
+			
+			.overlay a {
+				display: inline-block;
+				border-radius: 3px;
+				line-height: 32px;
+				text-decoration: none;
+				color: White;
+				font-size: 18px;
+				font-weight: bolder;
+				margin-top: 110px;
+			}
+			.overlay:hover a{
+				color: black;
+			}
+			.border {
+				border-top: 0px;
+				border-bottom: 0px;
+				border-left: 3px solid white;
+				border-right: 3px solid white;
+				position: absolute;
+				z-index: 6;
+				width: 200px;
+				height: 115px;
+				top: 27%;
+			}
+			
+			.borderS {
+				transform: rotate(60deg);
+				-ms-transform: rotate(60deg);
+				-moz-transform: rotate(60deg);
+				-webkit-transform: rotate(60deg);
+			}
+			
+			.borderT {
+				transform: rotate(120deg);
+				-ms-transform: rotate(120deg);
+				-moz-transform: rotate(120deg);
+				-webkit-transform: rotate(120deg);
+			}
+			/*三级菜单*/
+			
+			.projectCheck {
+				position: absolute;
+				top: 15%;
+				padding-right: 0px;
+				height: 70%;
+				z-index: 7;
+				background-color: #666666;
+				display: none;
+			}
+			
+			.projectCheck>div {
+				height: 100%;
+			}
+			
+			.blur {
+				-webkit-filter: blur(3px);
+			}
+			/*五级菜单*/
+			
+			.item {
+				border-right: 1px solid gray;
+				overflow-y: auto;
+				display: block;
+			}
+			
+			.item::-webkit-scrollbar {
+				width: 10px;
+				height: 10px;
+				background-color: orange;
+			}
+			
+			.item::-webkit-scrollbar-button {
+				display: none;
+			}
+			
+			.item::-webkit-scrollbar-thumb {
+				background-color: black;
+				width: 30px;
+				border-radius: 5px;
+			}
+			/*五级目录菜单*/
+			/*左侧菜单*/
+			
+			.sidebar-menu {
+				border-right: 1px solid #c4c8cb;
+			}
+			/*一级菜单*/
+			
+			.menu-first {
+				height: 45px;
+				line-height: 45px;
+				padding: 0;
+				font-size: 14px;
+				font-weight: normal;
+				display: block;
+				color: white;
+				font-family: "微软雅黑";
+				text-decoration: none;
+			}
+			/*一级菜单鼠标划过状态*/
+			
+			.menu-first:hover {
+				color: orange;
+				text-decoration: none;
+			}
+			
+			.menu-first:focus {
+				text-decoration: none;
+			}
+			/*二级菜单*/
+			
+			.menu-second li {
+				height: 31px;
+				line-height: 31px;
+				font-size: 12px;
+				text-align: center;
+				color: white;
+			}
+			/*二级菜单鼠标划过样式*/
+			
+			.menu-second li:hover {
+				text-decoration: none;
+				cursor: pointer;
+				color: black;
+			}
+			/*二级菜单选中状态*/
+			
+			.menu-second-selected {
+				background-color: #66c3ec;
+				height: 31px;
+				line-height: 31px;
+				border-top: 1px solid #83ceed;
+				border-bottom: 1px solid #83ceed;
+				border-right: 3px solid #f8881c;
+				border-left: 3px solid #66c3ec;
+				text-align: center;
+			}
+			/*覆盖bootstrap的样式*/
+			
+			.nav-list,
+			.nav-list li a {
+				padding: 0px;
+				margin: 0px;
+			}
+			/*右侧缩略图菜单*/
+			
+			.Thumbnail {
+				padding: 15px 15px 15px 15px;
+				overflow-y: auto;
+			}
+			/*缩略图滚动条*/
+			
+			.Thumbnail::-webkit-scrollbar {
+				width: 16px;
+				background-color: gray;
+			}
+			
+			.Thumbnail::-webkit-scrollbar-button {
+				display: none;
+			}
+			
+			.Thumbnail::-webkit-scrollbar-thumb {
+				background-color: #333333;
+			}
+			
+			.Thumbnail>img {
+				padding: 15px;
+				cursor: pointer;
+			}
+			
+			.fifthItem {
+				display: block;
+			}
+			/*六级目录 详细介绍*/
+			
+			.sixthItem {
+				display: none;
+				padding: 15px;
+			}
+			
+			.picture {
+				padding: 0px;
+			}
+			
+			.picture>img {
+				width: 100%;
+				padding: 0px;
+			}
+			
+			.introduction {
+				height: inherit;
+				overflow: auto;
+				word-wrap: break-word;
+			}
+			
+			.introduction::-webkit-scrollbar {
+				width: 16px;
+				background-color: gray;
+			}
+			
+			.introduction::-webkit-scrollbar-button {
+				display: none;
+			}
+			
+			.introduction::-webkit-scrollbar-thumb {
+				background-color: #333333;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="header">
+			<div class="nav col-lg-12  col-md-12 topNav">
+				<div class="mask"></div>
+				<div class="navbar-header pull-left">
+					<ul class="logo">
+						<li>
+							<a href="">
+								<img src="img/icon-medium.png" />
+								<span id="title">
+									广州达遂装饰工程有限公司
+									<span id="subTitle">
+										<small><small>Guangzhou Dasui Decoration Engineering Co.,Ltd. </small></small>
+									</span>
+								</span>
+							</a>
+
+						</li>
+					</ul>
+				</div>
+
+				<ul class="nav navbar-nav select pull-right">
+					<li><a href="#">首页</a></li>
+					<li><a href="#" class="">关于达遂</a>
+						<!--<ul class="secondItem">
+							<li>公司简介</li>
+							<li>组织构架</li>
+							<li>发展历程</li>
+							<li>达遂荣誉</li>
+						</ul>-->
+					</li>
+					<li><a href="#">项目巡礼</a>
+						<!--<ul class="secondItem">
+							<li id="">别墅</li>
+							<li id="">会所</li>
+							<li id="">住宅</li>
+							<li id="">商业</li>
+							<li id="">酒店</li>
+						</ul>-->
+					</li>
+					<li><a href="#">联系我们</a>
+						<!--<ul class="secondItem">
+							<li>招贤纳士</li>
+							<li>联系我们</li>
+						</ul>-->
+					</li>
+					<li><a href="#">合作伙伴</a></li>
+				</ul>
+
+			</div>
+		</div>
+		<div class="mainPart col-lg-12  col-md-12">
+
+			<div class="imgLun">
+
+				<div class="list col-lg-12">
+					<div class="picMask"></div>
+					<img src="img/pic1.png" />
+					<img src="img/蜂巢/4.jpg" />
+					<img src="img/pic1.png" />
+					<img src="img/蜂巢/4.jpg" />
+				</div>
+				<div class="buttons">
+					<span class="on"></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+			<div class="beeItem ">
+				<div class="lineF">
+					<div class="box box-first">
+						<div class="boxF">
+							<div class="boxS">
+								<div class="boxT ">
+									<div class="border borderF "></div>
+									<div class="border borderS "></div>
+									<div class="border borderT "></div>
+									<img src="img/蜂巢/1.jpg"style="height: 100%;" class="blur background"/>
+									<div class="overlay" >
+										<a href="#"></a>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box box-third">
+						<div class="boxF">
+							<div class="boxS">
+								<div class="boxT" >
+									<div class="border borderF "></div>
+									<div class="border borderS "></div>
+									<div class="border borderT"></div>
+									<img src="img/蜂巢/5.jpg"style="height: 100%;" class="blur background"/>
+									<div class="overlay">
+										<a href="#">时代南湾别墅</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box box-fifth">
+						<div class="boxF">
+							<div class="boxS">
+								<div class="boxT">
+									<img src="img/蜂巢/4.jpg"style="height: 100%;" class="blur background"/>
+									<div class="border borderF "></div>
+									<div class="border borderS "></div>
+									<div class="border borderT"></div>
+									<div class="overlay ">
+										<a href="#">你好</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="lineS">
+					<div class="box box-second">
+						<div class="boxF">
+							<div class="boxS">
+								<div class="boxT" >
+									<div class="border borderF "></div>
+									<div class="border borderS "></div>
+									<div class="border borderT"></div>
+									<img src="img/蜂巢/3.jpg"style="height: 100%;" class="blur background"/>
+									<div class="overlay ">
+										<a href="#">+</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box box-forth">
+						<div class="boxF">
+							<div class="boxS">
+								<div class="boxT" >
+									<img src="img/蜂巢/2.jpg"style="height: 100%;" class="blur background"/>
+									<div class="border borderF "></div>
+									<div class="border borderS "></div>
+									<div class="border borderT"></div>
+									<div class="overlay">
+										<a href="#">+</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box box-sixth">
+						<div class="boxF">
+							<div class="boxS">
+								<div class="boxT" >
+									<div class="border borderF "></div>
+									<div class="border borderS "></div>
+									<div class="border borderT"></div>
+									<div class="overlay">
+										<a href="#"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="projectCheck col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+				<div class="item col-lg-2 col-sm-3 col-xs-3 sidebar-menu fifthItem">
+					<a href="#villaMeun" class="nav-header menu-first collapsed" data-toggle="collapse">别墅</a>
+					<ul id="villaMeun" class="nav nav-list collapse menu-second">
+						<li>五级目录</li>
+						<li>五级目录</li>
+						<li>五级目录</li>
+						<li>五级目录</li>
+
+					</ul>
+					<a href="#clubMenu" class="nav-header menu-first collapsed" data-toggle="collapse">会所</a>
+					<ul id="clubMenu" class="nav nav-list collapse menu-second">
+						<li>五级目录</li>
+						<li>五级目录</li>
+					</ul>
+					<a href="#houseMenu" class="nav-header menu-first collapsed" data-toggle="collapse">住宅</a>
+					<ul id="houseMenu" class="nav nav-list collapse menu-second">
+						<li>五级目录</li>
+						<li>五级目录</li>
+					</ul>
+					<a href="#businessMenu" class="nav-header menu-first collapsed" data-toggle="collapse">商业</a>
+					<ul id="businessMenu" class="nav nav-list collapse menu-second">
+						<li>五级目录</li>
+						<li>五级目录</li>
+					</ul>
+					<a href="#hotelMenu" class="nav-header menu-first collapsed" data-toggle="collapse">酒店</a>
+					<ul id="hotelMenu" class="nav nav-list collapse menu-second">
+						<li>五级目录</li>
+						<li>五级目录</li>
+						<li>五级目录</li>
+						<li>五级目录</li>
+						<li>五级目录</li>
+						<li>五级目录</li>
+					</ul>
+				</div>
+				<div class="Thumbnail col-lg-10 col-sm-9 col-xs-9 fifthItem">
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="1" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="2" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="3" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="4" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="5" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="6" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="7" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-6 col-xs-6" data-project="8" />
+				</div>
+				<div class="sixthItem">
+					<div class="picture col-xs-6">
+						<img src="img/蜂巢/2.jpg" />
+					</div>
+					<div class="introduction col-xs-6">
+						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+
+		</div>
+
+	</body>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.mousewheel.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.mCustomScrollbar.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/handlebars-v4.0.5.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function() {
+			slideShow(300, $('.list'), $('.buttons span'));
+		});
+
+		function slideShow(speed, target, ctrl) {
+			var container = $('.imgLun');
+			var list = target;
+			var buttons = ctrl;
+			var index = 1;
+			var imgList = $('.list img');
+			var len = $(".list img").length;
+			var interval = 3000;
+			var timer = null;
+			var buttonsLen = $(".buttons span").length;
+			var imgWid = parseInt(imgList.eq(0).css("width"));
+			timer = setInterval(function() { //打开定时器
+				index++; //让图片的索引值次序加1，这样就可以实现顺序轮播图片
+				if (index > buttons.length - 1) { //当到达最后一张图的时候，让index赋值为第一张图的索引值，轮播效果跳转到第一张图重新开始
+					index = 0;
+				}
+				buttons.eq(index).trigger("click"); //模拟触发数字按钮的click
+			}, 3000);
+			//var i = combine();
+			//console.log(speed);
+			//			function combine() {
+			//				Lcloned = imgList.eq(len - 1).clone();
+			//				Fcloned = imgList.eq(0).clone();
+			//				//console.log(imgWid);
+			//				Lcloned.insertBefore(imgList.eq(0));
+			//				Fcloned.insertAfter(imgList.eq(len - 1));
+			//			} //动态添加最后第一幅图和最后一幅图的过度
+			function showButton(index) {
+				buttons.eq(index).addClass('on').siblings().removeClass('on');
+			}
+			//焦点按钮选定时形态改变
+			buttons.each(function() {
+				$(this).bind('click', function() {
+					if (list.is(':animated') || $(this).attr('class') == 'on') {
+						return;
+					}
+					var myIndex = parseInt($(this).index());
+					animate(myIndex, 100);
+					index = myIndex;
+					showButton(index);
+				})
+			});
+
+			function animate(num, speed) {
+				target.fadeOut(500, function() {
+					$('.list').css({
+						'background-image': "url(" + imgList.eq(num).attr('src') + ")"
+					});
+					target.fadeIn(500);
+				})
+			}
+		}
+		var config = {
+			"首页": {},
+			"关于达遂": {
+				"公司简介": " ",
+				"组织构架": " ",
+				"发展历程": " ",
+				"达遂荣誉": " "
+			},
+			"项目巡礼": {
+				"别墅": "#villaMeun",
+				"会所": "#clubMenu",
+				"住宅": "#houseMenu",
+				"酒店": "#businessMenu",
+				"商业": "#businessMenu"
+			},
+			"联系我们": {
+				"招纳贤士": " ",
+				"联系我们": " "
+			}
+		}
+		$(".select li").mouseover(function(e) {
+			if ($(".box").is(':animated')) {
+				return;
+			}
+			$(".projectCheck").hide();
+			getSecondItem(e.toElement.innerText, config, $(".box"), $(".beeItem"));
+		});
+
+		function getSecondItem(target, config, Item, source) {
+			var num;
+			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
+			var situation = 0;
+			source.show();
+			for (var x in config) {
+				if (x == target) {
+					num = 0;
+					while (num <= Item.length) {
+						$('.box-' + order[num]).fadeOut();
+						num++;
+					}
+					console.log(situation);
+					num = 0;
+					for (var z in config[x]) {
+						$('.box-' + order[num]).find($(".overlay a")).text(z);
+						$('.box-' + order[num]).fadeIn();
+						num = num + 1;
+					}
+				}
+			}
+		}
+		$(".box").click(function(e) {
+			getFifthItem(e.toElement.innerText, config["项目巡礼"], $(".projectCheck"), $(".beeItem"));
+		})
+
+		function getFifthItem(target, config, Item, source) {
+			for (var x in config) {
+				if (x == target) {
+					source.hide();
+					Item.show();
+					$('.fifthItem').show();
+					$('.sixthItem').hide();
+					Item.find($("a")).map(function() {
+						if ($(this).attr("href") == config[x]) {
+							$(this).trigger("click").siblings().map(function() {
+							});
+						}
+					});
+				}
+			}
+		}
+		$('.Thumbnail>img').click(function(e) {
+			//getSixthItem();
+			getSixthItem(e.toElement, null, $(".sixthItem"), $(".fifthItem"));
+		})
+
+		function getSixthItem(target, config, Item, source) {
+			//$(target).attr("data-project")
+			Item.show();
+			source.hide();
+		}
+	</script>
+
+</html>
