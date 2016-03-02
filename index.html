@@ -84,8 +84,10 @@
 				font-size: 16px;
 				color: white;
 			}
-			
-			.select a:hover {
+		
+			.select a:hover,
+			.select a:checked,
+			.select a:link {
 				color: black;
 				background-color: transparent!important;
 			}
@@ -197,7 +199,6 @@
 				position: absolute;
 				z-index: 60;
 				top: 20%;
-				left: 30%;
 				display: block;
 			}
 			
@@ -209,9 +210,11 @@
 			.clear {
 				clear: both;
 			}
+			
 			.background {
 				display: inline-block;
 			}
+			
 			.box {
 				position: relative;
 				width: 630px;
@@ -228,7 +231,7 @@
 			
 			.lineS {
 				top: 172px;
-				left: 100px;
+				left: 116px;
 			}
 			
 			.boxF,
@@ -290,9 +293,11 @@
 				font-weight: bolder;
 				margin-top: 110px;
 			}
-			.overlay:hover a{
+			
+			.overlay:hover a {
 				color: black;
 			}
+			
 			.border {
 				border-top: 0px;
 				border-bottom: 0px;
@@ -560,8 +565,8 @@
 					<span></span>
 				</div>
 			</div>
-			<div class="beeItem ">
-				<div class="lineF">
+			<div class="beeItem col-xs-12">
+				<div class="lineF col-xs-6 col-xs-offset-4">
 					<div class="box box-first">
 						<div class="boxF">
 							<div class="boxS">
@@ -569,11 +574,11 @@
 									<div class="border borderF "></div>
 									<div class="border borderS "></div>
 									<div class="border borderT "></div>
-									<img src="img/蜂巢/1.jpg"style="height: 100%;" class="blur background"/>
-									<div class="overlay" >
+									<img src="img/蜂巢/1.jpg" style="height: 100%;" class="blur background" />
+									<div class="overlay">
 										<a href="#"></a>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>
@@ -581,11 +586,11 @@
 					<div class="box box-third">
 						<div class="boxF">
 							<div class="boxS">
-								<div class="boxT" >
+								<div class="boxT">
 									<div class="border borderF "></div>
 									<div class="border borderS "></div>
 									<div class="border borderT"></div>
-									<img src="img/蜂巢/5.jpg"style="height: 100%;" class="blur background"/>
+									<img src="img/蜂巢/5.jpg" style="height: 100%;" class="blur background" />
 									<div class="overlay">
 										<a href="#">时代南湾别墅</a>
 									</div>
@@ -597,7 +602,7 @@
 						<div class="boxF">
 							<div class="boxS">
 								<div class="boxT">
-									<img src="img/蜂巢/4.jpg"style="height: 100%;" class="blur background"/>
+									<img src="img/蜂巢/4.jpg" style="height: 100%;" class="blur background" />
 									<div class="border borderF "></div>
 									<div class="border borderS "></div>
 									<div class="border borderT"></div>
@@ -609,15 +614,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="lineS">
+				<div class="lineS col-xs-6 col-xs-offset-4">
 					<div class="box box-second">
 						<div class="boxF">
 							<div class="boxS">
-								<div class="boxT" >
+								<div class="boxT">
 									<div class="border borderF "></div>
 									<div class="border borderS "></div>
 									<div class="border borderT"></div>
-									<img src="img/蜂巢/3.jpg"style="height: 100%;" class="blur background"/>
+									<img src="img/蜂巢/3.jpg" style="height: 100%;" class="blur background" />
 									<div class="overlay ">
 										<a href="#">+</a>
 									</div>
@@ -628,8 +633,8 @@
 					<div class="box box-forth">
 						<div class="boxF">
 							<div class="boxS">
-								<div class="boxT" >
-									<img src="img/蜂巢/2.jpg"style="height: 100%;" class="blur background"/>
+								<div class="boxT">
+									<img src="img/蜂巢/2.jpg" style="height: 100%;" class="blur background" />
 									<div class="border borderF "></div>
 									<div class="border borderS "></div>
 									<div class="border borderT"></div>
@@ -643,7 +648,7 @@
 					<div class="box box-sixth">
 						<div class="boxF">
 							<div class="boxS">
-								<div class="boxT" >
+								<div class="boxT">
 									<div class="border borderF "></div>
 									<div class="border borderS "></div>
 									<div class="border borderT"></div>
@@ -727,7 +732,8 @@
 	<script src="js/handlebars-v4.0.5.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(function() {
-			slideShow(300, $('.list'), $('.buttons span'));
+			timer = slideShow(300, $('.list'), $('.buttons span'));
+			return timer;
 		});
 
 		function slideShow(speed, target, ctrl) {
@@ -781,52 +787,94 @@
 					target.fadeIn(500);
 				})
 			}
+			return timer;
 		}
 		var config = {
 			"首页": {},
 			"关于达遂": {
-				"公司简介": " ",
-				"组织构架": " ",
-				"发展历程": " ",
-				"达遂荣誉": " "
+				"公司简介": {
+					URL: " ",
+					position: 1
+				},
+				"组织构架": {
+					URL: " ",
+					position: 2
+				},
+				"发展历程": {
+					URL: " ",
+					position: 3
+				},
+				"达遂荣誉": {
+					URL: " ",
+					position: 4
+				}
 			},
 			"项目巡礼": {
-				"别墅": "#villaMeun",
-				"会所": "#clubMenu",
-				"住宅": "#houseMenu",
-				"酒店": "#businessMenu",
-				"商业": "#businessMenu"
+				"别墅": {
+					URL: "#villaMeun",
+					position: 1
+				},
+				"会所": {
+					URL: "#clubMenu",
+					position: 2
+				},
+				"住宅": {
+					URL: "#houseMenu",
+					position: 3
+				},
+				"酒店": {
+					URL: "#businessMenu",
+					position: 4
+				},
+				"商业": {
+					URL: "#businessMenu",
+					position: 5
+				}
 			},
 			"联系我们": {
-				"招纳贤士": " ",
-				"联系我们": " "
+				"招纳贤士": {
+					URL: " ",
+					position: 3
+				},
+				"联系我们": {
+					URL: " ",
+					position: 5
+				}
 			}
 		}
-		$(".select li").mouseover(function(e) {
+		$(".select li").click(function(e) {
 			if ($(".box").is(':animated')) {
 				return;
 			}
 			$(".projectCheck").hide();
 			getSecondItem(e.toElement.innerText, config, $(".box"), $(".beeItem"));
+			stopCarousel(timer);
 		});
-
+		function stopCarousel(target) {
+			clearInterval(target);
+		}
+		function reloadCarousel (target) {
+			slideShow(300, $('.list'), $('.buttons span'));
+		}
 		function getSecondItem(target, config, Item, source) {
 			var num;
 			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
 			var situation = 0;
+			var position;
 			source.show();
+			if (target == "首页") {
+				stopCarousel(timer);
+			} else{
+				reloadCarousel();
+			}
 			for (var x in config) {
 				if (x == target) {
-					num = 0;
-					while (num <= Item.length) {
-						$('.box-' + order[num]).fadeOut();
-						num++;
-					}
-					console.log(situation);
+					$('.box').fadeOut();
 					num = 0;
 					for (var z in config[x]) {
-						$('.box-' + order[num]).find($(".overlay a")).text(z);
-						$('.box-' + order[num]).fadeIn();
+						position = config[x][z].position - 1;
+						$('.box-' + order[position]).find($(".overlay a")).text(z);
+						$('.box-' + order[position]).fadeIn();
 						num = num + 1;
 					}
 				}
@@ -845,8 +893,7 @@
 					$('.sixthItem').hide();
 					Item.find($("a")).map(function() {
 						if ($(this).attr("href") == config[x]) {
-							$(this).trigger("click").siblings().map(function() {
-							});
+							$(this).trigger("click").siblings().map(function() {});
 						}
 					});
 				}
