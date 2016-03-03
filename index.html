@@ -12,7 +12,9 @@
 			html {
 				height: 100%;
 			}
-			
+			iframe {
+				display: none;
+			}
 			body {
 				background-color: grey;
 				min-width: 1024px;
@@ -23,7 +25,7 @@
 			.header {
 				min-width: 1024px;
 			}
-			
+			/*背景轮播*/
 			.mainPart {
 				height: inherit;
 				padding: 0px;
@@ -71,7 +73,7 @@
 			.buttons .on {
 				background: orange;
 			}
-			
+			/*导航栏*/
 			.select>li {
 				float: left;
 				list-style-type: none;
@@ -724,7 +726,7 @@
 		<div class="footer">
 
 		</div>
-
+		<iframe class="seventhItem" src="contact.html" width="100%" height="100%" style="position: absolute; z-index: 3;top: 0px;left: 0px;"></iframe>
 	</body>
 	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript" charset="utf-8"></script>
@@ -750,7 +752,6 @@
 			this.begin = function (time){
 				self.work();
 				this.timer = setInterval(this.begin, time);
-				console.log(this);
 			}//打开定时器
 			this.work = function () { 
 				this.index++; //让图片的索引值次序加1，这样就可以实现顺序轮播图片
@@ -840,11 +841,11 @@
 			},
 			"联系我们": {
 				"招纳贤士": {
-					URL: " ",
+					URL: "contact.html",
 					position: 3
 				},
 				"联系我们": {
-					URL: " ",
+					URL: "contact.html",
 					position: 5
 				}
 			}
@@ -883,7 +884,9 @@
 			}
 		}
 		$(".box").click(function(e) {
+			$('iframe').hide();
 			getFifthItem(e.toElement.innerText, config["项目巡礼"], $(".projectCheck"), $(".beeItem"));
+			getIframe(e.toElement.innerText, config["联系我们"], $(".seventhItem"), $(".beeItem"));
 		})
 
 		function getFifthItem(target, config, Item, source) {
@@ -910,6 +913,15 @@
 			//$(target).attr("data-project")
 			Item.show();
 			source.hide();
+		}
+		function getIframe (target, config, Item, source){
+			for (var x in config) {
+				if (x == target) {
+					source.hide();
+					Item.attr('src',config[x].URL);
+					Item.show();
+				}
+			}
 		}
 	</script>
 
