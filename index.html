@@ -84,7 +84,7 @@
 				font-size: 16px;
 				color: white;
 			}
-		
+			
 			.select a:hover,
 			.select a:checked,
 			.select a:link {
@@ -732,62 +732,69 @@
 	<script src="js/handlebars-v4.0.5.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(function() {
-			timer = slideShow(300, $('.list'), $('.buttons span'));
-			return timer;
-		});
+			time = new slideShow(300, $('.list'), $('.buttons span'));
+			time.init(3000);
 
+		});
+		
 		function slideShow(speed, target, ctrl) {
-			var container = $('.imgLun');
-			var list = target;
-			var buttons = ctrl;
-			var index = 1;
-			var imgList = $('.list img');
-			var len = $(".list img").length;
-			var interval = 3000;
-			var timer = null;
-			var buttonsLen = $(".buttons span").length;
-			var imgWid = parseInt(imgList.eq(0).css("width"));
-			timer = setInterval(function() { //打开定时器
-				index++; //让图片的索引值次序加1，这样就可以实现顺序轮播图片
-				if (index > buttons.length - 1) { //当到达最后一张图的时候，让index赋值为第一张图的索引值，轮播效果跳转到第一张图重新开始
-					index = 0;
+			this.container = $('.imgLun');
+			this.list = target;
+			this.buttons = ctrl;
+			this.index = 1;
+			this.imgList = $('.list img');
+			this.len = $(".list img").length;
+			this.buttonsLen = $(".buttons span").length;
+			this.imgWid = parseInt(this.imgList.eq(0).css("width"));
+			var self = this;
+			this.begin = function (time){
+				self.work();
+				this.timer = setInterval(this.begin, time);
+				console.log(this);
+			}//打开定时器
+			this.work = function () { 
+				this.index++; //让图片的索引值次序加1，这样就可以实现顺序轮播图片
+				if (this.index > this.buttons.length - 1) { //当到达最后一张图的时候，让index赋值为第一张图的索引值，轮播效果跳转到第一张图重新开始
+					this.index = 0;
 				}
-				buttons.eq(index).trigger("click"); //模拟触发数字按钮的click
-			}, 3000);
-			//var i = combine();
-			//console.log(speed);
-			//			function combine() {
-			//				Lcloned = imgList.eq(len - 1).clone();
-			//				Fcloned = imgList.eq(0).clone();
-			//				//console.log(imgWid);
-			//				Lcloned.insertBefore(imgList.eq(0));
-			//				Fcloned.insertAfter(imgList.eq(len - 1));
-			//			} //动态添加最后第一幅图和最后一幅图的过度
-			function showButton(index) {
-				buttons.eq(index).addClass('on').siblings().removeClass('on');
+				this.buttons.eq(this.index).trigger("click"); //模拟触发数字按钮的click
+			}
+			this.showButton = function(index){	
+				self.buttons.eq(this.index).addClass('on').siblings().removeClass('on');
 			}
 			//焦点按钮选定时形态改变
-			buttons.each(function() {
+			this.init = function (time) {
+				self.controler(this.buttons);
+				self.begin(time);
+				
+			}
+			this.stop = function () {
+				clearInterval(self.timer);
+			}
+			this.controler = function (control) {
+				control.each(function() {
 				$(this).bind('click', function() {
-					if (list.is(':animated') || $(this).attr('class') == 'on') {
+					if (self.list.is(':animated') || $(this).attr('class') == 'on') {
 						return;
 					}
 					var myIndex = parseInt($(this).index());
-					animate(myIndex, 100);
-					index = myIndex;
-					showButton(index);
+					self.animate(myIndex, 100);
+					self.index = myIndex;
+					self.showButton(self.index);
 				})
 			});
+			}
+			
 
-			function animate(num, speed) {
-				target.fadeOut(500, function() {
+			this.animate = function (num, speed) {
+				self.list.fadeOut(500, function() {
 					$('.list').css({
-						'background-image': "url(" + imgList.eq(num).attr('src') + ")"
+						'background-image': "url(" + self.imgList.eq(num).attr('src') + ")"
 					});
-					target.fadeIn(500);
+					self.list.fadeIn(500);
 				})
 			}
-			return timer;
+			
 		}
 		var config = {
 			"首页": {},
@@ -848,24 +855,19 @@
 			}
 			$(".projectCheck").hide();
 			getSecondItem(e.toElement.innerText, config, $(".box"), $(".beeItem"));
-			stopCarousel(timer);
 		});
-		function stopCarousel(target) {
-			clearInterval(target);
-		}
-		function reloadCarousel (target) {
-			slideShow(300, $('.list'), $('.buttons span'));
-		}
+
+
 		function getSecondItem(target, config, Item, source) {
 			var num;
 			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
 			var situation = 0;
 			var position;
 			source.show();
-			if (target == "首页") {
-				stopCarousel(timer);
-			} else{
-				reloadCarousel();
+			if (target === "首页") {
+				time.begin(3000);
+			} else {
+				time.stop();
 			}
 			for (var x in config) {
 				if (x == target) {
