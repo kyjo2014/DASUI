@@ -27,10 +27,6 @@
 			#map {
 				height: 100%;
 			}
-			
-			#map canvas {
-				width: 100%!important;
-			}
 		</style>
 		<style type="text/css">
 			html {
@@ -64,7 +60,6 @@
 			.select a:hover {
 				color: black;
 				background-color: transparent!important;
-				
 			}
 			
 			.select li:hover {
@@ -73,6 +68,10 @@
 			
 			.select:nth-last-child(1) {
 				padding-right: 30px;
+			}
+			
+			.select span {
+				padding: 5px;
 			}
 			
 			small {
@@ -111,11 +110,63 @@
 			
 			#title {
 				letter-spacing: 8px;
+				display: inline-block;
 			}
 			
 			#subTitle {
 				letter-spacing: normal;
-				display: inline;
+				display: block;
+			}
+			/*合作伙伴信息*/
+			
+			.information {
+				position: absolute;
+				z-index: 3;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				display: none;
+			}
+			.information .logo,
+			.project {
+				display: inline-block;
+			}
+			.information .logo>img {
+				width: 150px;
+			}
+			.information li {
+				list-style-type: none;
+			}
+			.information ul {
+				padding: 0px;
+			}
+			.information>div {
+				position: absolute;
+				width: 20%;
+			}
+			#finelind {
+				top: 30%;
+				left: 5%;
+			}
+			#finetang {
+				top: 50%;
+				left: 10%;
+			}
+			#RF {
+				top: 70%;
+				left: 20%;
+			}
+			#yanLord {
+				top: 15%;
+				left: 40%;
+			}
+			#zhaoShang {
+				right: 0px;
+				top: 20%;
+			}
+			#greenTown {
+				top: 40%;
+				right: 10%;
 			}
 		</style>
 		<script src="js/cooperate/echarts.min.js"></script>
@@ -128,7 +179,7 @@
 				<div class="navbar-header pull-right">
 					<ul class="logo">
 						<li>
-							<a href="">
+							<a href="index.html">
 								<img src="img/icon-medium.png" />
 								<span id="title">
 									广州达遂装饰工程有限公司
@@ -145,24 +196,104 @@
 				<ul class="nav navbar-nav select pull-left">
 					<li>
 						<a href="">
-						
-							<span >
+
+							<span id="title">
 									合作伙伴
-									<span >
-										<small><small>HEZUO&nbsp;HUOBAN</small></small>
-									</span>
+							</span>
+							<span id="subTitle">
+								<small><small>HEZUO&nbsp;HUOBAN</small></small>
 							</span>
 						</a>
 
 					</li>
 				</ul>
-				
+
 			</div>
 		</div>
 		<div class="main col-xs-12">
 			<div id="map" class="col-xs-12"></div>
 			<div class="information">
-				
+				<div id="finelind">
+
+					<div class="logo">
+						<img src="img/合作伙伴/方圆2.jpg" />
+					</div>
+					<div class="project">
+						<ul>
+							<li>方圆大学城</li>
+							<li>增城云山诗意</li>
+							<li>南沙云山诗意</li>
+							<li>珠海明月山溪</li>
+							<li>广州云山诗意</li>
+							<li>从化明月山溪</li>
+						</ul>
+					</div>
+				</div>
+				<div id="finetang">
+					<div class="logo">
+						<img src="img/合作伙伴/盛唐.jpg" />
+					</div>
+					<div class="project">
+						<ul>
+							<li>盛唐地产办公室</li>
+						</ul>
+					</div>
+				</div>
+				<div id="RF">
+					<div class="logo">
+						<img src="img/合作伙伴/fuli.png" />
+					</div>
+					<div class="project">
+						<ul>
+							<li>杨箕旧城改造</li>
+							<li>猎德大厦</li>
+							<li> 凯华城-盈耀大厦</li>
+						</ul>
+					</div>
+				</div>
+				<!--<div id="chinaHotel">
+					<div class="logo">
+						<img src="img/合作伙伴/" />
+					</div>
+					<div class="project">
+						<ul>
+							<li></li>
+						</ul>
+					</div>
+				</div>-->
+				<div id="greenTown">
+					<div class="logo">
+						<img src="img/合作伙伴/logo.gif" />
+					</div>
+					<div class="project">
+						<ul>
+							<li>杭州绿城桃李春风</li>
+						</ul>
+					</div>
+				</div>
+				<div id="yanLord">
+					<div class="logo">
+						<img src="img/合作伙伴/xz7.jpg" />
+					</div>
+					<div class="project">
+						<ul>
+							<li>兰州仁恒国际 </li>
+							<li>兰州仁恒国际美林郡</li>
+						</ul>
+					</div>
+				</div>
+				<div id="zhaoShang">
+					<div class="logo">
+						<img src="img/合作伙伴/t01e3cef0d25070c5f4.jpg" />
+					</div>
+					<div class="project">
+						<ul>
+							<li>金山谷</li>
+						</ul>
+					</div>
+
+				</div>
+
 			</div>
 		</div>
 		<div class="footer">
@@ -329,14 +460,20 @@
 						}]
 					}]
 				});
+				window.onresize = function() {
+					chart.resize();
+				}
 				chart.on('click', function(e) {
 					console.log(e.name);
 					//console.log(chart.);
 				})
 			});
 			var config = {
-				
 			}
+			$(window).load(function () {
+				$('.information').fadeIn(3000)
+				console.log("yes")
+			})
 		</script>
 	</body>
 
