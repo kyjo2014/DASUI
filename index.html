@@ -218,8 +218,7 @@
 			}
 			
 			.box {
-				position: relative;
-				width: 610px;
+				float: left;
 				z-index: 6;
 				display: none;
 			}
@@ -229,9 +228,14 @@
 				position: absolute;
 				visibility: visible;
 				z-index: 5;
-				padding-left: 72px;
+				
 			}
-			
+			.box-first,
+			.box-second {
+				margin-left: -webkit-calc(50% - 300px);
+				margin-left: -moz-calc(50% - 300px);
+				margin-left: calc(50% - 300px);
+			}
 			.lineS {
 				top: 172px;
 				left: 116px;
@@ -569,7 +573,7 @@
 				</div>
 			</div>
 			<div class="beeItem col-xs-12">
-				<div class="lineF col-xs-6 col-xs-offset-3 row">
+				<div class="lineF col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 row">
 					<div class="box box-first ">
 						<div class="boxF">
 							<div class="boxS">
@@ -617,7 +621,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="lineS col-xs-6 col-xs-offset-3">
+				<div class="lineS col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
 					<div class="box box-second">
 						<div class="boxF">
 							<div class="boxS">
@@ -843,11 +847,11 @@
 			"联系我们": {
 				"招纳贤士": {
 					URL: "contact.html",
-					position: 3
+					position: 1
 				},
 				"联系我们": {
 					URL: "contact.html",
-					position: 5
+					position: 3
 				}
 			}
 		}
