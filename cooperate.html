@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<title>ECharts</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/jqcloud.css"/>
 		<!-- 引入 echarts.js -->
 		<style type="text/css">
 			html {
@@ -130,12 +131,15 @@
 			.information .logo,
 			.project {
 				display: inline-block;
+				vertical-align: middle;
 			}
 			.information .logo>img {
 				width: 150px;
 			}
 			.information li {
 				list-style-type: none;
+				font-family: "微软雅黑";
+				color: blue;
 			}
 			.information ul {
 				padding: 0px;
@@ -167,6 +171,17 @@
 			#greenTown {
 				top: 40%;
 				right: 10%;
+			}
+			#times {
+				top:50%;
+				right: 10%;
+			}
+			#times img {
+				float: left;
+				align-content: center;
+			}
+			#times {
+				
 			}
 		</style>
 		<script src="js/cooperate/echarts.min.js"></script>
@@ -293,13 +308,20 @@
 					</div>
 
 				</div>
-
+				<div id="times">
+					<div class="logo">
+						<img src="img/合作伙伴/时代2.jpg" />
+					</div>
+					<div class="project" >
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="footer">
 
 		</div>
 		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/jqcloud-1.0.4.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			$.get('js/cooperate/map/china.json', function(chinaJson) {
 				echarts.registerMap('china', chinaJson);
@@ -468,11 +490,32 @@
 					//console.log(chart.);
 				})
 			});
-			var config = {
-			}
+			var word_array = [
+          {text: "清远时代花城", weight: 1},
+          {text: "广州萝岗时代春树里", weight: 1, html: {class: "w1"} },
+          {text: "时代地产基地", weight: 1, html: {class: "w1"}},
+          {text: "清远时代倾城", weight: 1, html: {class: "w1"}},
+          {text: "时代美术馆", weight: 1, html: {class: "w1"}},
+          {text: "时代中心总部", weight: 1, html: {class: "w1"}},
+          {text: "时代先烈南YOU公寓", weight: 1, html: {class: "w1"}},
+          
+          {text: "广州时代花生", weight: 1, html: {class: "w1"}},
+          {text: "时代狮山依云小镇", weight: 1, html: {class: "w1"}},
+          {text: "佛山时代糖果", weight: 1, html: {class: "w1"}},
+          {text: "佛山时代云图", weight: 1, html: {class: "w1"}},
+          {text: "佛山罗村时代倾城", weight: 1, html: {class: "w1"}},
+          {text: "中山时代倾城 ", weight:1, html: {class: "w1"}},
+          {text: "中山时代云图", weight: 1, html: {class: "w1"}},
+          {text: "三水时代倾城", weight: 1, html: {class: "w1"}},
+          {text: "珠海斗门时代倾城", weight: 1, html: {class: "w1"}},
+          {text: "清远时代倾城", weight: 1, html: {class: "w1"}},
+          {text: "珠海时代山湖海", weight: 1, html: {class: "w1"}},
+          
+          // ...as many words as you want
+      ];
 			$(window).load(function () {
 				$('.information').fadeIn(3000)
-				console.log("yes")
+				$('#times .project').jQCloud(word_array,{width:300,height:200,removeOverflowing :false});
 			})
 		</script>
 	</body>
