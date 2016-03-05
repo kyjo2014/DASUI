@@ -12,9 +12,11 @@
 			html {
 				height: 100%;
 			}
+			
 			iframe {
 				display: none;
 			}
+			
 			body {
 				background-color: grey;
 				min-width: 1024px;
@@ -26,6 +28,7 @@
 				min-width: 1024px;
 			}
 			/*背景轮播*/
+			
 			.mainPart {
 				height: inherit;
 				padding: 0px;
@@ -74,6 +77,7 @@
 				background: orange;
 			}
 			/*导航栏*/
+			
 			.select>li {
 				float: left;
 				list-style-type: none;
@@ -228,14 +232,15 @@
 				position: absolute;
 				visibility: visible;
 				z-index: 5;
-				
 			}
+			
 			.box-first,
 			.box-second {
 				margin-left: -webkit-calc(50% - 300px);
 				margin-left: -moz-calc(50% - 300px);
 				margin-left: calc(50% - 300px);
 			}
+			
 			.lineS {
 				top: 172px;
 				left: 116px;
@@ -741,9 +746,8 @@
 		$(function() {
 			time = new slideShow(300, $('.list'), $('.buttons span'));
 			time.init(3000);
-
 		});
-		
+
 		function slideShow(speed, target, ctrl) {
 			this.container = $('.imgLun');
 			this.list = target;
@@ -754,45 +758,42 @@
 			this.buttonsLen = $(".buttons span").length;
 			this.imgWid = parseInt(this.imgList.eq(0).css("width"));
 			var self = this;
-			this.begin = function (time){
-				self.work();
-				this.timer = setInterval(this.begin, time);
-			}//打开定时器
-			this.work = function () { 
+			this.begin = function(time) {
+					self.work();
+					this.timer = setInterval(this.begin, time);
+				} //打开定时器
+			this.work = function() {
 				this.index++; //让图片的索引值次序加1，这样就可以实现顺序轮播图片
 				if (this.index > this.buttons.length - 1) { //当到达最后一张图的时候，让index赋值为第一张图的索引值，轮播效果跳转到第一张图重新开始
 					this.index = 0;
 				}
 				this.buttons.eq(this.index).trigger("click"); //模拟触发数字按钮的click
 			}
-			this.showButton = function(index){	
-				self.buttons.eq(this.index).addClass('on').siblings().removeClass('on');
-			}
-			//焦点按钮选定时形态改变
-			this.init = function (time) {
+			this.showButton = function(index) {
+					self.buttons.eq(this.index).addClass('on').siblings().removeClass('on');
+				}
+				//焦点按钮选定时形态改变
+			this.init = function(time) {
 				self.controler(this.buttons);
 				self.begin(time);
-				
 			}
-			this.stop = function () {
+			this.stop = function() {
 				clearInterval(self.timer);
 			}
-			this.controler = function (control) {
+			this.controler = function(control) {
 				control.each(function() {
-				$(this).bind('click', function() {
-					if (self.list.is(':animated') || $(this).attr('class') == 'on') {
-						return;
-					}
-					var myIndex = parseInt($(this).index());
-					self.animate(myIndex, 100);
-					self.index = myIndex;
-					self.showButton(self.index);
-				})
-			});
+					$(this).bind('click', function() {
+						if (self.list.is(':animated') || $(this).attr('class') == 'on') {
+							return;
+						}
+						var myIndex = parseInt($(this).index());
+						self.animate(myIndex, 100);
+						self.index = myIndex;
+						self.showButton(self.index);
+					})
+				});
 			}
-			
-
-			this.animate = function (num, speed) {
+			this.animate = function(num, speed) {
 				self.list.fadeOut(500, function() {
 					$('.list').css({
 						'background-image': "url(" + self.imgList.eq(num).attr('src') + ")"
@@ -800,25 +801,24 @@
 					self.list.fadeIn(500);
 				})
 			}
-			
 		}
 		var config = {
 			"首页": {},
 			"关于达遂": {
 				"公司简介": {
-					URL: " ",
+					URL: "introduction.html",
 					position: 1
 				},
 				"组织构架": {
-					URL: " ",
+					URL: "frame.html",
 					position: 2
 				},
 				"发展历程": {
-					URL: " ",
+					URL: "history.html",
 					position: 3
 				},
 				"达遂荣誉": {
-					URL: " ",
+					URL: "glory.html",
 					position: 4
 				}
 			},
@@ -863,7 +863,6 @@
 			getSecondItem(e.toElement.innerText, config, $(".box"), $(".beeItem"));
 		});
 
-
 		function getSecondItem(target, config, Item, source) {
 			var num;
 			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
@@ -872,6 +871,7 @@
 			source.show();
 			if (target === "首页") {
 				time.begin(3000);
+				$('iframe').hide();
 			} else {
 				time.stop();
 			}
@@ -891,7 +891,7 @@
 		$(".box").click(function(e) {
 			$('iframe').hide();
 			getFifthItem(e.toElement.innerText, config["项目巡礼"], $(".projectCheck"), $(".beeItem"));
-			getIframe(e.toElement.innerText, config["联系我们"], $(".seventhItem"), $(".beeItem"));
+			getIframe(e.toElement.innerText, [config["联系我们"], config["关于达遂"]], $(".seventhItem"), $(".beeItem"));
 		})
 
 		function getFifthItem(target, config, Item, source) {
@@ -919,12 +919,15 @@
 			Item.show();
 			source.hide();
 		}
-		function getIframe (target, config, Item, source){
-			for (var x in config) {
-				if (x == target) {
-					source.hide();
-					Item.attr('src',config[x].URL);
-					Item.show();
+
+		function getIframe(target, config, Item, source) {
+			for (var y = 0; y < config.length; y++) {
+				for (var x in config[y]) {
+					if (x == target) {
+						source.hide();
+						Item.attr('src', config[y][x].URL);
+						Item.show();
+					}
 				}
 			}
 		}
