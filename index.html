@@ -241,6 +241,12 @@
 				margin-left: calc(50% - 300px);
 			}
 			
+			.boxMore {
+				margin-left: -webkit-calc(50% - 200px);
+				margin-left: -moz-calc(50% - 200px);
+				margin-left: calc(50% - 200px);
+			}
+			
 			.lineS {
 				top: 172px;
 				left: 116px;
@@ -475,6 +481,7 @@
 			.sixthItem {
 				display: none;
 				padding: 15px;
+				overflow-y: ;
 			}
 			
 			.picture {
@@ -483,6 +490,7 @@
 			
 			.picture>img {
 				width: 100%;
+				height: 100%;
 				padding: 0px;
 			}
 			
@@ -565,9 +573,9 @@
 
 				<div class="list col-lg-12">
 					<div class="picMask"></div>
-					<img src="img/pic1.png" />
+					<img src="img/pic1.jpg" />
 					<img src="img/蜂巢/4.jpg" />
-					<img src="img/pic1.png" />
+					<img src="img/pic1.jpg" />
 					<img src="img/蜂巢/4.jpg" />
 				</div>
 				<div class="buttons">
@@ -877,13 +885,21 @@
 			}
 			for (var x in config) {
 				if (x == target) {
-					$('.box').fadeOut();
-					num = 0;
+					$('.box').each(function() {
+						if ($(this).css("display") !== "none") {
+							$(this).fadeOut(function() {
+								if (target === "联系我们") {
+									$('.box-first,.box-second').addClass('boxMore');
+								} else {
+									$('.box-first,.box-second').removeClass('boxMore');
+								}
+							});
+						}
+					});
 					for (var z in config[x]) {
 						position = config[x][z].position - 1;
 						$('.box-' + order[position]).find($(".overlay a")).text(z);
 						$('.box-' + order[position]).fadeIn();
-						num = num + 1;
 					}
 				}
 			}
