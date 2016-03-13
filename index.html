@@ -348,7 +348,7 @@
 				position: absolute;
 				top: 15%;
 				padding-right: 0px;
-				height: 70%;
+				height: 80%;
 				z-index: 7;
 				background-color: #666666;
 				display: none;
@@ -482,7 +482,7 @@
 			.sixthItem {
 				display: none;
 				padding: 15px;
-				overflow-y: ;
+				overflow-y: auto;
 			}
 			
 			.picture {
@@ -497,20 +497,22 @@
 			
 			.introduction {
 				height: inherit;
-				overflow: auto;
 				word-wrap: break-word;
 			}
 			
-			.introduction::-webkit-scrollbar {
+			.introduction::-webkit-scrollbar,
+			.sixthItem::-webkit-scrollbar {
 				width: 16px;
 				background-color: gray;
 			}
 			
-			.introduction::-webkit-scrollbar-button {
+			.introduction::-webkit-scrollbar-button,
+			.sixthItem::-webkit-scrollbar-button {
 				display: none;
 			}
 			
-			.introduction::-webkit-scrollbar-thumb {
+			.introduction::-webkit-scrollbar-thumb, 
+			.sixthItem::-webkit-scrollbar-thumb{
 				background-color: #333333;
 			}
 		</style>
