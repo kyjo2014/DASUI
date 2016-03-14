@@ -348,13 +348,16 @@
 				position: absolute;
 				top: 15%;
 				padding-right: 0px;
+				padding-top: 30px;
+				padding-bottom: 15px;
 				height: 80%;
 				z-index: 7;
 				background-color: #666666;
 				display: none;
+				overflow-y: hidden;
 			}
 			
-			.projectCheck>div {
+			.projectCheck>div:not(#projectCheck-guide) {
 				height: 100%;
 			}
 			
@@ -511,9 +514,20 @@
 				display: none;
 			}
 			
-			.introduction::-webkit-scrollbar-thumb, 
-			.sixthItem::-webkit-scrollbar-thumb{
+			.introduction::-webkit-scrollbar-thumb,
+			.sixthItem::-webkit-scrollbar-thumb {
 				background-color: #333333;
+			}
+			/*三级、四级、五级目录导航*/
+			
+			#projectCheck-guide {
+				position: absolute;
+				top: 0px;
+				height: 15px;
+			}
+			
+			#projectCheck-guide dt {
+				float: left;
 			}
 		</style>
 	</head>
@@ -541,8 +555,8 @@
 				</div>
 
 				<ul class="nav navbar-nav select pull-right">
-					<li><a href="#">首页</a></li>
-					<li><a href="#" class="">关于达遂</a>
+					<li id="main"><a href="#">首页</a></li>
+					<li id="about"><a href="#" class="">关于达遂</a>
 						<!--<ul class="secondItem">
 							<li>公司简介</li>
 							<li>组织构架</li>
@@ -550,7 +564,7 @@
 							<li>达遂荣誉</li>
 						</ul>-->
 					</li>
-					<li><a href="#">项目巡礼</a>
+					<li id="projectCheck"><a href="#">项目巡礼</a>
 						<!--<ul class="secondItem">
 							<li id="">别墅</li>
 							<li id="">会所</li>
@@ -559,13 +573,13 @@
 							<li id="">酒店</li>
 						</ul>-->
 					</li>
-					<li><a href="#">联系我们</a>
+					<li id="contactUs"><a href="#">联系我们</a>
 						<!--<ul class="secondItem">
 							<li>招贤纳士</li>
 							<li>联系我们</li>
 						</ul>-->
 					</li>
-					<li><a href="cooperate.html">合作伙伴</a></li>
+					<li id="cooperate"><a href="cooperate.html">合作伙伴</a></li>
 				</ul>
 
 			</div>
@@ -685,6 +699,12 @@
 				</div>
 			</div>
 			<div class="projectCheck col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+				<div class="nav " id="projectCheck-guide">
+					<dl>
+						<dt>首页&gt;</dt>
+						<dt>项目巡礼&gt;</dt>
+					</dl>
+				</div>
 				<div class="item col-lg-2 col-sm-3 col-xs-3 sidebar-menu fifthItem">
 					<a href="#villaMeun" class="nav-header menu-first collapsed" data-toggle="collapse">别墅</a>
 					<ul id="villaMeun" class="nav nav-list collapse menu-second">
@@ -871,11 +891,16 @@
 			}
 		}
 		$(".select li").click(function(e) {
-			if ($(".box").is(':animated')) {
-				return;
+			try {
+				if ($(".box").is(':animated')) {
+					return;
+				}
+				$(".projectCheck").hide();
+				getSecondItem(e.toElement.innerText, config, $(".box"), $(".beeItem"));
+			} catch (e) {
+				//TODO handle the exception
+				time.begin(3000);
 			}
-			$(".projectCheck").hide();
-			getSecondItem(e.toElement.innerText, config, $(".box"), $(".beeItem"));
 		});
 
 		function getSecondItem(target, config, Item, source) {
@@ -883,32 +908,37 @@
 			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
 			var situation = 0;
 			var position;
-			source.show();
-			if (target === "首页") {
-				time.begin(3000);
-				$('iframe').hide();
-			} else {
-				time.stop();
-			}
-			for (var x in config) {
-				if (x == target) {
-					$('.box').each(function() {
-						if ($(this).css("display") !== "none") {
-							$(this).fadeOut(function() {
-								if (target === "联系我们") {
-									$('.box-first,.box-second').addClass('boxMore');
-								} else {
-									$('.box-first,.box-second').removeClass('boxMore');
-								}
-							});
+			try {
+				source.show();
+				if (target === "首页") {
+					time.begin(3000);
+					$('iframe').hide();
+				} else {
+					time.stop();
+				}
+				for (var x in config) {
+					if (x == target) {
+						$('.box').each(function() {
+							if ($(this).css("display") !== "none") {
+								$(this).fadeOut(function() {
+									if (target === "联系我们") {
+										$('.box-first,.box-second').addClass('boxMore');
+									} else {
+										$('.box-first,.box-second').removeClass('boxMore');
+									}
+								});
+							}
+						});
+						for (var z in config[x]) {
+							position = config[x][z].position - 1;
+							$('.box-' + order[position]).find($(".overlay a")).text(z);
+							$('.box-' + order[position]).fadeIn();
 						}
-					});
-					for (var z in config[x]) {
-						position = config[x][z].position - 1;
-						$('.box-' + order[position]).find($(".overlay a")).text(z);
-						$('.box-' + order[position]).fadeIn();
 					}
 				}
+			} catch (e) {
+				//TODO handle the exception
+				console.log(e);
 			}
 		}
 		$(".box").click(function(e) {
@@ -941,6 +971,19 @@
 			//$(target).attr("data-project")
 			Item.show();
 			source.hide();
+		}
+		$("#projectCheck-guide dt").click(function(e) {
+			getProjectGuide(e.toElement);
+		})
+
+		function getProjectGuide(target) {
+			var text = target.innerText.slice(0, -1);
+			if (text === "首页") {
+				$('#main').trigger('click');
+			} else if (text === "项目巡礼") {
+				$('.fifthItem').show();
+				$('.sixthItem').hide();
+			}
 		}
 
 		function getIframe(target, config, Item, source) {
