@@ -106,7 +106,7 @@
 				padding-right: 30px;
 			}
 			
-			small {
+			.logo small {
 				display: block;
 			}
 			
@@ -207,7 +207,16 @@
 				top: 20%;
 				display: block;
 			}
-			
+			.beeItem-title {
+				position: absolute;
+				top: -60px;
+				text-align: center;
+				color: white;
+				display: none;
+			}
+			.beeItem-title small {
+				color: inherit;
+			}
 			ul,
 			ul li {
 				list-style: none;
@@ -603,7 +612,12 @@
 				</div>
 			</div>
 			<div class="beeItem col-xs-12">
+				<div class="beeItem-title col-xs-8 col-xs-offset-2" id=""> 
+					<h1>CASE <small>项目展示 Program Show</small></h1>
+					
+				</div>
 				<div class="lineF col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 row">
+					
 					<div class="box box-first ">
 						<div class="boxF">
 							<div class="boxS">
@@ -740,14 +754,14 @@
 					</ul>
 				</div>
 				<div class="Thumbnail col-lg-10 col-sm-9 col-xs-9 fifthItem">
-					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="1" />
-					<img src="img/缩略图/1.jpg" class="col-xs-4" data-project="2" />
-					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="3" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="4" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="5" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="6" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="7" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="8" />
+					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="1" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class="col-xs-4" data-project="2" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="3" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="4" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="5" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="6" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="7" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="8" alt="图片无法读取"/>
 				</div>
 				<div class="sixthItem">
 					<div class="picture col-xs-9">
@@ -916,6 +930,13 @@
 				} else {
 					time.stop();
 				}
+				if (target === "关于达遂" ) {
+					getNav("关于达遂 About DASUI",true);
+				} else if(target === "项目巡礼") {
+					getNav("项目展示 Program Show",true);
+				} else {
+					getNav(null,false);
+				}
 				for (var x in config) {
 					if (x == target) {
 						$('.box').each(function() {
@@ -940,6 +961,15 @@
 				//TODO handle the exception
 				console.log(e);
 			}
+		}
+		function getNav (title,situation) {
+			if(situation === true) {
+				$(".beeItem-title").fadeIn();
+				$(".beeItem-title small").text(title);
+			} else {
+				$(".beeItem-title").fadeOut();
+			}
+			
 		}
 		$(".box").click(function(e) {
 			$('iframe').hide();
