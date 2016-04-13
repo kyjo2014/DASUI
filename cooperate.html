@@ -24,6 +24,7 @@
 			
 			.main {
 				height: 90%;
+				margin-top: 50px;
 			}
 			
 			#map {
@@ -147,15 +148,15 @@
 			}
 			.information>div {
 				position: absolute;
-				width: 20%;
+				width: 18%;
 			}
 			#finelind {
 				top: 30%;
-				left: 5%;
+				left: 2%;
 			}
 			#finetang {
 				top: 50%;
-				left: 10%;
+				left: 4%;
 			}
 			#RF {
 				top: 70%;
@@ -171,25 +172,30 @@
 			}
 			#greenTown {
 				top: 40%;
-				right: 10%;
+				right: 8%;
 			}
 			#times {
 				top:50%;
-				right: 10%;
+				right: 6%;
 			}
 			#times img {
 				float: left;
 				align-content: center;
 			}
-			#times {
-				
+			#chinaHotel {
+				bottom: 10%;
+				left: 35%;
+			}
+			#weisiding {
+				bottom: 2%;
+				left: 45%;
 			}
 		</style>
 		<script src="js/cooperate/echarts.min.js"></script>
 	</head>
 
 	<body>
-		<div class="header">
+		<div class="header row">
 			<div class="nav col-lg-12  col-md-12 topNav">
 				<div class="mask"></div>
 				<div class="navbar-header pull-right">
@@ -226,10 +232,20 @@
 
 			</div>
 		</div>
-		<div class="main col-xs-12">
+		<div class="main row col-xs-12">
+			<div id="information-top">
+				
+			</div>
 			<div id="map" class="col-xs-12"></div>
-			<div class="information">
-				<div id="finelind">
+			<div class="information" id="information-middle">
+				<div id="information-left">
+					
+				</div>
+				
+				<div id="information-right">
+					
+				</div>
+				<div class="partner" id="finelind">
 
 					<div class="logo">
 						<img src="img/合作伙伴/fangyuan.png" />
@@ -245,7 +261,7 @@
 						</ul>
 					</div>
 				</div>
-				<div id="finetang">
+				<div class="partner" id="finetang">
 					<div class="logo">
 						<img src="img/合作伙伴/shengtang.png" />
 					</div>
@@ -255,7 +271,7 @@
 						</ul>
 					</div>
 				</div>
-				<div id="RF">
+				<div class="partner" id="RF">
 					<div class="logo">
 						<img src="img/合作伙伴/fuli.png" />
 					</div>
@@ -277,7 +293,7 @@
 						</ul>
 					</div>
 				</div>-->
-				<div id="greenTown">
+				<div class="partner" id="greenTown">
 					<div class="logo">
 						<img src="img/合作伙伴/lvcheng.png" />
 					</div>
@@ -287,7 +303,7 @@
 						</ul>
 					</div>
 				</div>
-				<div id="yanLord">
+				<div class="partner" id="yanLord">
 					<div class="logo">
 						<img src="img/合作伙伴/renheng.png" />
 					</div>
@@ -298,7 +314,7 @@
 						</ul>
 					</div>
 				</div>
-				<div id="zhaoShang">
+				<div class="partner" id="zhaoShang">
 					<div class="logo">
 						<img src="img/合作伙伴/zhaoshang.png" />
 					</div>
@@ -309,13 +325,30 @@
 					</div>
 
 				</div>
-				<div id="times">
+				<div class="partner" id="times">
 					<div class="logo">
 						<img src="img/合作伙伴/shidai.png" />
 					</div>
 					<div class="project" >
 					</div>
 				</div>
+				<div class="partner" id="chinaHotel">
+					<div class="logo">
+						<img src="img/合作伙伴/chinaHotel.png" />
+					</div>
+					<div class="project" >
+					</div>
+				</div>
+				<div class="partner" id="weisiding">
+				<div class="logo">
+						<img src="img/合作伙伴/威斯丁.png" />
+					</div>
+					<div class="project" >
+					</div>
+				</div>
+			</div>
+			<div id="information-bottom">
+			
 			</div>
 		</div>
 		<div class="footer">

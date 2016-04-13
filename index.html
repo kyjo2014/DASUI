@@ -530,6 +530,26 @@
 			.sixthItem::-webkit-scrollbar-thumb {
 				background-color: #333333;
 			}
+			/*六级目录箭头*/
+			.sixthItem:hover .arrows {
+				visibility: visible;
+			}
+			.arrows {
+				visibility: hidden;
+			}
+			.arrows div {
+				position: absolute;
+				z-index: 7;
+				top: 50%;
+				cursor: pointer;
+			}
+			#arrowleft {
+				transform:rotate(90deg);
+			}
+			#arrowright {
+				transform:rotate(-90deg);
+				right: 15px;
+			}
 			/*三级、四级、五级目录导航*/
 			
 			#projectCheck-guide {
@@ -606,7 +626,7 @@
 					<img src="img/轮播/2.jpg" />
 					<img src="img/轮播/3.jpg" />
 					<img src="img/轮播/4.jpg" />
-					<img src="img/轮播/5.jpg"/>
+					<img src="img/轮播/5.jpg" />
 				</div>
 				<div class="buttons">
 					<span class="on"></span>
@@ -617,12 +637,12 @@
 				</div>
 			</div>
 			<div class="beeItem col-xs-12">
-				<div class="beeItem-title col-xs-8 col-xs-offset-2" id=""> 
+				<div class="beeItem-title col-xs-8 col-xs-offset-2" id="">
 					<h1>CASE <small>项目展示 Program Show</small></h1>
-					
+
 				</div>
 				<div class="lineF col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 row">
-					
+
 					<div class="box box-first ">
 						<div class="boxF">
 							<div class="boxS">
@@ -760,26 +780,37 @@
 				</div>
 				<div class="Thumbnail col-lg-10 col-sm-9 col-xs-9 fifthItem">
 					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="1" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-xs-4" data-project="2" alt="图片无法读取"/>
-					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="3" alt="图片无法读取"/>
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="4" alt="图片无法读取"/>
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="5" alt="图片无法读取"/>
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="6" alt="图片无法读取"/>
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="7" alt="图片无法读取"/>
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="8" alt="图片无法读取"/>
+					<img src="img/缩略图/1.jpg" class="col-xs-4" data-project="2" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="3" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="4" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="5" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="6" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="7" alt="图片无法读取" />
+					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="8" alt="图片无法读取" />
 				</div>
 				<div class="sixthItem">
-					<div class="picture col-xs-9">
-						<img src="img/蜂巢/2.jpg" />
+					<div class="arrows">
+						<div id="arrowleft">
+							<img src="img/6thItem/向下.png" />
+						</div>
+						<div id="arrowright">
+							<img src="img/6thItem/向下.png" />
+						</div>
 					</div>
-					<div class="introduction col-xs-3">
-						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
-						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
-						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
-						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
-						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
-						多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+					<div class="content" id="sixth-content" data-number = "4">
+						<div class="picture col-xs-9">
+							<img src="img/蜂巢/2.jpg" />
+						</div>
+						<div class="introduction col-xs-3">
+							多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+							多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+							多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+							多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+							多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+							多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此 多建在城郊或风景区，中国古代称别业、别馆，3 世纪，意大利山坡地带出现台阶式别墅。中国西晋出现别墅，如洛阳石崇的金谷别墅。此
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -1042,6 +1073,24 @@
 						Item.show();
 					}
 				}
+			}
+		}
+		$("#arrowleft").click(function () {
+			$(".content").hide(300);
+			changeContent($(".content"),"img/轮播/2.jpg","asidoghosaidgh");
+			$(".content").show(300);
+		});
+		$("#arrowright").click(function () {
+			$(".content").hide(300);
+			changeContent($(".content"),"img/轮播/2.jpg","asidoghosaidgh");
+			$(".content").show(300);
+		})
+		function changeContent (target,picture,text) {
+			if (target) {
+				target.find(".picture img").attr('src',picture);
+				target.find(".introduction").text(text);
+			} else{
+				throw "can not get target";
 			}
 		}
 	</script>
