@@ -889,54 +889,54 @@
 				"公司简介": {
 					URL: "introduction.html",
 					position: 1,
-					bg: " "
+					bg: "img/蜂巢/2.jpg"
 				},
 				"组织构架": {
 					URL: "frame.html",
 					position: 2,
-					bg: " "
+					bg: "img/蜂巢/3.jpg"
 				},
 				"发展历程": {
 					URL: "history.html",
 					position: 3,
-					bg: " "
+					bg: "img/蜂巢/4.jpg"
 				},
 				"达遂荣誉": {
 					URL: "glory.html",
 					position: 4,
-					bg: " "
+					bg: "img/蜂巢/5.jpg"
 				},
 				"公司动态": {
 					URL: " ",
 					position: 5,
-					bg: " "
+					bg: "img/蜂巢/1.jpg"
 				}
 			},
 			"项目巡礼": {
 				"豪华别墅": {
 					URL: "#villaMeun",
 					position: 1,
-					bg: " "
+					bg: "img/轮播/2.jpg"
 				},
 				"会所售楼部": {
 					URL: "#clubMenu",
 					position: 2,
-					bg: " "
+					bg: "img/轮播/3.jpg"
 				},
 				"住宅楼盘": {
 					URL: "#houseMenu",
 					position: 3,
-					bg: " "
+					bg: "img/轮播/4.jpg"
 				},
 				"酒店空间": {
 					URL: "#businessMenu",
 					position: 4,
-					bg: " "
+					bg: "img/轮播/5.jpg"
 				},
 				"商业办公": {
 					URL: "#businessMenu",
 					position: 5,
-					bg: " "
+					bg: "img/轮播/6.jpg"
 				}
 			},
 			"联系我们": {
@@ -1001,6 +1001,7 @@
 						for (var z in config[x]) {
 							position = config[x][z].position - 1;
 							$('.box-' + order[position]).find($(".overlay a")).text(z);
+							$('.box-' + order[position]).find($(".background")).attr("src",config[x][z].bg);
 							$('.box-' + order[position]).fadeIn();
 						}
 					}
