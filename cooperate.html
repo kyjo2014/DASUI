@@ -11,22 +11,22 @@
 			html {
 				height: 100%;
 			}
-			
+
 			body {
 				height: inherit;
 				background-image: url(img/合作伙伴/bg.png);
 			}
-			
+
 			.header {
 				height: 5%;
 			}
 			/*导航栏*/
-			
+
 			.main {
 				height: 90%;
 				margin-top: 50px;
 			}
-			
+
 			#map {
 				height: 100%;
 			}
@@ -35,25 +35,25 @@
 			html {
 				height: 100%;
 				overflow: auto;
-				
+
 			}
-			
+
 			body {
 				min-width: 1024px;
 				min-height: 700px;
 				height: inherit;
 				overflow-y: hidden;
 			}
-			
+
 			.header {
 				min-width: 1024px;
 			}
-			
+
 			.select>li {
 				float: left;
 				list-style-type: none;
 			}
-			
+
 			.select a {
 				padding: 15px;
 				text-decoration: none;
@@ -62,48 +62,48 @@
 				color: #100964;
 				font-size: 30px;
 			}
-			
+
 			.select a:hover {
 				color: black;
 				background-color: transparent!important;
 			}
-			
+
 			.select li:hover {
 				display: block;
 			}
-			
+
 			.select:nth-last-child(1) {
 				padding-right: 30px;
 			}
-			
+
 			.select span {
 				padding: 5px;
 			}
-			
+
 			small {
 				display: block;
 			}
-			
+
 			.logo {
 				position: relative;
 				z-index: 2;
 			}
-			
+
 			.logo>li {
 				list-style-type: none;
 			}
-			
+
 			.logo a {
 				text-decoration: none;
 				font-size: 16px;
 				font-family: "微软雅黑";
 			}
-			
+
 			.logo span {
 				display: inline-block;
 				vertical-align: middle;
 			}
-			
+
 			.topNav {
 				position: absolute;
 				top: 0;
@@ -113,18 +113,18 @@
 				overflow: hidden;
 				padding-right: 0px;
 			}
-			
+
 			#title {
 				letter-spacing: 8px;
 				display: inline-block;
 			}
-			
+
 			#subTitle {
 				letter-spacing: normal;
 				display: block;
 			}
 			/*合作伙伴信息*/
-			
+
 			.information {
 				position: absolute;
 				z-index: 3;
@@ -134,7 +134,7 @@
 				display: none;
 				font-size: 1vw;
 			}
-			
+
 			.information .logo,
 			.project {
 				display: inline-block;
@@ -194,9 +194,13 @@
 				bottom: 10%;
 				left: 35%;
 			}
+
 			#weisiding {
 				bottom: 2%;
 				left: 45%;
+			}
+			#weisiding .logo {
+				width: 60%
 			}
 		</style>
 		<script src="js/cooperate/echarts.min.js"></script>
@@ -242,16 +246,16 @@
 		</div>
 		<div class="main row col-xs-12">
 			<div id="information-top">
-				
+
 			</div>
 			<div id="map" class="col-xs-12"></div>
 			<div class="information" id="information-middle">
 				<div id="information-left">
-					
+
 				</div>
-				
+
 				<div id="information-right">
-					
+
 				</div>
 				<div class="partner" id="finelind">
 
@@ -356,7 +360,7 @@
 				</div>
 			</div>
 			<div id="information-bottom">
-			
+
 			</div>
 		</div>
 		<div class="footer">
@@ -540,7 +544,7 @@
           {text: "时代美术馆", weight: 1, html: {class: "w2"}},
           {text: "时代中心总部", weight: 1, html: {class: "w2"}},
           {text: "时代先烈南YOU公寓", weight: 1, html: {class: "w2"}},
-          
+
           {text: "广州时代花生", weight: 1, html: {class: "w2"}},
           {text: "时代狮山依云小镇", weight: 1, html: {class: "w2"}},
           {text: "佛山时代糖果", weight: 1, html: {class: "w2"}},
@@ -552,7 +556,7 @@
           {text: "珠海斗门时代倾城", weight: 1, html: {class: "w2"}},
           {text: "清远时代倾城", weight: 1, html: {class: "w2"}},
           {text: "珠海时代山湖海", weight: 1, html: {class: "w2"}},
-          
+
           // ...as many words as you want
       ];
 			$(window).load(function () {

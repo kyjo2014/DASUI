@@ -207,6 +207,7 @@
 				top: 20%;
 				display: block;
 			}
+			
 			.beeItem-title {
 				position: absolute;
 				top: -60px;
@@ -214,9 +215,11 @@
 				color: white;
 				display: none;
 			}
+			
 			.beeItem-title small {
 				color: inherit;
 			}
+			
 			ul,
 			ul li {
 				list-style: none;
@@ -311,7 +314,7 @@
 			}
 			
 			.overlay a {
-				display: none;
+				display: inline-block;
 				border-radius: 3px;
 				line-height: 32px;
 				text-decoration: none;
@@ -320,9 +323,11 @@
 				font-weight: bolder;
 				margin-top: 110px;
 			}
+			
 			.overlay:hover {
-				background-color: rgba(255,255,255,0.7);
+				1background-color: rgba(255, 255, 255, 0.7);
 			}
+			
 			.overlay:hover a {
 				color: black;
 				display: inline-block;
@@ -531,23 +536,28 @@
 				background-color: #333333;
 			}
 			/*六级目录箭头*/
+			
 			.sixthItem:hover .arrows {
 				visibility: visible;
 			}
+			
 			.arrows {
 				visibility: hidden;
 			}
+			
 			.arrows div {
 				position: absolute;
 				z-index: 7;
 				top: 50%;
 				cursor: pointer;
 			}
+			
 			#arrowleft {
-				transform:rotate(90deg);
+				transform: rotate(90deg);
 			}
+			
 			#arrowright {
-				transform:rotate(-90deg);
+				transform: rotate(-90deg);
 				right: 15px;
 			}
 			/*三级、四级、五级目录导航*/
@@ -798,7 +808,7 @@
 							<img src="img/6thItem/向下.png" />
 						</div>
 					</div>
-					<div class="content" id="sixth-content" data-number = "4">
+					<div class="content" id="sixth-content" data-number="4">
 						<div class="picture col-xs-9">
 							<img src="img/蜂巢/2.jpg" />
 						</div>
@@ -955,7 +965,7 @@
 		}
 		$(".select li").click(function(e) {
 			try {
-				if ($(".box").is(':animated')) {
+				if ($(".box").is(':animated') || $(".beeItem").is(':animated')) {
 					return;
 				}
 				$(".projectCheck").hide();
@@ -966,60 +976,116 @@
 			}
 		});
 
+		function boxToggle(config, target) {
+			var position;
+			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
+			$(".box").hide("fast", function() {
+				if (target === "联系我们") {
+					$('.box-first,.box-second').addClass('boxMore');
+				} else {
+					$('.box-first,.box-second').removeClass('boxMore');
+				};
+				for (var z in config[target]) {
+					position = config[target][z].position - 1;
+					$('.box-' + order[position]).find($(".overlay a")).text(z);
+					$('.box-' + order[position]).find($(".background")).attr("src", config[target][z].bg);
+					$('.box-' + order[position]).css("display", "inline-block");
+				}
+			});
+		}
+
 		function getSecondItem(target, config, Item, source) {
 			var num;
 			var order = ['first', 'second', 'third', 'forth', 'fifth', 'sixth'];
 			var situation = 0;
 			var position;
 			try {
-				source.show();
 				if (target === "首页") {
 					time.begin(3000);
 					$('iframe').hide();
+					source.fadeOut();
 				} else {
 					time.stop();
-				}
-				if (target === "关于达遂" ) {
-					getNav("关于达遂 About DASUI",true);
-				} else if(target === "项目巡礼") {
-					getNav("项目展示 Program Show",true);
-				} else {
-					getNav(null,false);
-				}
-				for (var x in config) {
-					if (x == target) {
-						$('.box').each(function() {
-							if ($(this).css("display") !== "none") {
-								$(this).fadeOut(function() {
-									if (target === "联系我们") {
-										$('.box-first,.box-second').addClass('boxMore');
-									} else {
-										$('.box-first,.box-second').removeClass('boxMore');
-									}
-								});
-							}
-						});
-						for (var z in config[x]) {
-							position = config[x][z].position - 1;
-							$('.box-' + order[position]).find($(".overlay a")).text(z);
-							$('.box-' + order[position]).find($(".background")).attr("src",config[x][z].bg);
-							$('.box-' + order[position]).fadeIn();
+					source.fadeIn();
+					source.fadeOut(100, function() {
+						//					for (var x in config) {
+						//						if (x == target) {
+						//							Item.hide("fast", function() {
+						//								if (target === "联系我们") {
+						//									$('.box-first,.box-second').addClass('boxMore');
+						//								} else {
+						//									$('.box-first,.box-second').removeClass('boxMore');
+						//								};
+						//		
+						//							});
+						//							for (var z in config[x]) {
+						//								position = config[x][z].position - 1;
+						//								$('.box-' + order[position]).find($(".overlay a")).text(z);
+						//								$('.box-' + order[position]).find($(".background")).attr("src", config[x][z].bg);
+						//								$('.box-' + order[position]).show();
+						//							}
+						//						}
+						//					}
+						if (target === "关于达遂") {
+							getNav("关于达遂 About DASUI", true);
+							boxToggle(config, target);
+						} else if (target === "项目巡礼") {
+							getNav("项目展示 Program Show", true);
+							boxToggle(config, target);
+						} else if (target === "联系我们") {
+							getNav("联系我们 Connect Us", true);
+							boxToggle(config, target);
+						} else {
+							getNav(null, false);
 						}
-					}
+						source.fadeIn();
+					});
 				}
+				//				if (target === "关于达遂" ) {
+				//					getNav("关于达遂 About DASUI",true);
+				//				} else if(target === "项目巡礼") {
+				//					getNav("项目展示 Program Show",true);
+				//				} else if(target === "联系我们") {
+				//					getNav("联系我们 Connect Us",true);
+				//				} else {
+				//                  getNav(null,false);
+				//              }
+				//				for (var x in config) {
+				//					if (x == target) {
+				//						 $('.box').each(function() {
+				//						 	if ($(this).css("display") !== "none") {
+				//						 		$(this).fadeOut(function() {
+				//						 			if (target === "联系我们") {
+				//						 				$('.box-first,.box-second').addClass('boxMore');
+				//						 			} else {
+				//						 				$('.box-first,.box-second').removeClass('boxMore');
+				//						 			};
+				//                        
+				//						 		});
+				//						 	}
+				//						 });
+				//						 for (var z in config[x]) {
+				//						 	position = config[x][z].position - 1;
+				//						 	$('.box-' + order[position]).find($(".overlay a")).text(z);
+				//						 	$('.box-' + order[position]).find($(".background")).attr("src",config[x][z].bg);
+				//						 	$('.box-' + order[position]).show();
+				//						 }
+				//					}
+				//				}
+				//				source.fadeIn();
 			} catch (e) {
 				//TODO handle the exception
 				console.log(e);
 			}
 		}
-		function getNav (title,situation) {
-			if(situation === true) {
+
+		function getNav(title, situation) {
+			if (situation === true) {
 				$(".beeItem-title").fadeIn();
 				$(".beeItem-title small").text(title);
 			} else {
 				$(".beeItem-title").fadeOut();
 			}
-			
 		}
 		$(".box").click(function(e) {
 			$('iframe').hide();
@@ -1077,21 +1143,22 @@
 				}
 			}
 		}
-		$("#arrowleft").click(function () {
+		$("#arrowleft").click(function() {
 			$(".content").hide(300);
-			changeContent($(".content"),"img/轮播/2.jpg","asidoghosaidgh");
+			changeContent($(".content"), "img/轮播/2.jpg", "asidoghosaidgh");
 			$(".content").show(300);
 		});
-		$("#arrowright").click(function () {
+		$("#arrowright").click(function() {
 			$(".content").hide(300);
-			changeContent($(".content"),"img/轮播/2.jpg","asidoghosaidgh");
+			changeContent($(".content"), "img/轮播/2.jpg", "asidoghosaidgh");
 			$(".content").show(300);
 		})
-		function changeContent (target,picture,text) {
+
+		function changeContent(target, picture, text) {
 			if (target) {
-				target.find(".picture img").attr('src',picture);
+				target.find(".picture img").attr('src', picture);
 				target.find(".introduction").text(text);
-			} else{
+			} else {
 				throw "can not get target";
 			}
 		}
