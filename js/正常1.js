@@ -171,7 +171,7 @@
  ****/
 
 
-
+setInterval(function() {},100)
 function lunbo(speed) {
 	var container = $('.imgLun');
 	var list = $('.list');
