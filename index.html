@@ -758,35 +758,23 @@
 				<div class="item col-lg-2 col-sm-3 col-xs-3 sidebar-menu fifthItem">
 					<a href="#villaMeun" class="nav-header menu-first collapsed" data-toggle="collapse">豪华别墅</a>
 					<ul id="villaMeun" class="nav nav-list collapse menu-second">
-						<li>五级目录</li>
-						<li>五级目录</li>
-						<li>五级目录</li>
-						<li>五级目录</li>
-
+						
 					</ul>
 					<a href="#clubMenu" class="nav-header menu-first collapsed" data-toggle="collapse">豪华会所</a>
 					<ul id="clubMenu" class="nav nav-list collapse menu-second">
-						<li>五级目录</li>
-						<li>五级目录</li>
+						
 					</ul>
 					<a href="#houseMenu" class="nav-header menu-first collapsed" data-toggle="collapse">住宅楼盘</a>
 					<ul id="houseMenu" class="nav nav-list collapse menu-second">
-						<li>五级目录</li>
-						<li>五级目录</li>
+						
 					</ul>
 					<a href="#businessMenu" class="nav-header menu-first collapsed" data-toggle="collapse">商业办公</a>
 					<ul id="businessMenu" class="nav nav-list collapse menu-second">
-						<li>五级目录</li>
-						<li>五级目录</li>
+						
 					</ul>
 					<a href="#hotelMenu" class="nav-header menu-first collapsed" data-toggle="collapse">酒店空间</a>
 					<ul id="hotelMenu" class="nav nav-list collapse menu-second">
-						<li>五级目录</li>
-						<li>五级目录</li>
-						<li>五级目录</li>
-						<li>五级目录</li>
-						<li>五级目录</li>
-						<li>五级目录</li>
+						
 					</ul>
 				</div>
 				<div class="Thumbnail col-lg-10 col-sm-9 col-xs-9 fifthItem">
@@ -940,7 +928,7 @@
 					bg: "img/蜂巢/项目巡礼/2.png"
 				},
 				"酒店空间": {
-					URL: "#businessMenu",
+					URL: "#hotelMenu",
 					position: 4,
 					bg: "img/蜂巢/项目巡礼/4.jpg"
 				},
@@ -1098,11 +1086,41 @@
 				if (x == target) {
 					source.hide();
 					Item.show();
-					$('.fifthItem').show();
+					ajaxForfifthItem(function (data) {
+						var config = {
+							"别墅": "villaMeun",
+							"住宅": "houseMenu",
+							"酒店": "hotelMenu",
+							"会所": "clubMenu",
+							"商业": "businessMenu"
+							
+						}
+						var sort;
+						//建筑类型名字
+						var project;
+						//项目名称
+						for (var i = 0; i<data.length; i++) {
+							sort = 	data[i].name;
+							project = data[i].project;
+							$("#"+config[sort]).html(" ");
+							for (var j = 0;j<project.length;j++) {
+								$("#"+config[sort]).append($("<li>"+project[j].name+"</li>"));
+							}
+						}
+						$('.fifthItem').show();
+					});
+					
 					$('.sixthItem').hide();
-					Item.find($("a")).map(function() {
-						if ($(this).attr("href") == config[x]) {
-							$(this).trigger("click").siblings().map(function() {});
+					Item.find("a").map(function() {
+						if ($(this).attr("href") == config[x].URL) {
+							//检测其他标签是否打开，打开的收回
+							$(this).trigger("click").siblings("a").map(function () {
+								console.log($(this).attr("aria-expanded"),$(this).attr("aria-expanded") == "true");
+								if($(this).attr("aria-expanded") == "true") {
+									console.log(this);
+									$(this).trigger("click");
+								}
+							});
 						}
 					});
 				}
@@ -1131,7 +1149,15 @@
 				$('.sixthItem').hide();
 			}
 		}
-
+		function setProjectGuide(target) {
+			var text = target.innerText.slice(0, -1);
+			if (text === "首页") {
+				$('#main').trigger('click');
+			} else if (text === "项目巡礼") {
+				$('.fifthItem').show();
+				$('.sixthItem').hide();
+			}
+		}
 		function getIframe(target, config, Item, source) {
 			for (var y = 0; y < config.length; y++) {
 				for (var x in config[y]) {
@@ -1161,6 +1187,24 @@
 			} else {
 				throw "can not get target";
 			}
+		}
+		function ajaxForfifthItem (callback) {
+			try{
+				$.ajax({
+					type:"get",
+					url:"http://api.johannlai.com/categories",
+					async:true,
+					success: function (e) {
+						//console.log(e);
+						callback(e)
+					}
+				});
+			}catch(e){
+				//TODO handle the exception
+			}
+		}
+		function ajaxForsixthItem () {
+			 
 		}
 	</script>
 
