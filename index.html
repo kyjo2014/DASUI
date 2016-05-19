@@ -758,34 +758,27 @@
 				<div class="item col-lg-2 col-sm-3 col-xs-3 sidebar-menu fifthItem">
 					<a href="#villaMeun" class="nav-header menu-first collapsed" data-toggle="collapse">豪华别墅</a>
 					<ul id="villaMeun" class="nav nav-list collapse menu-second">
-						
+
 					</ul>
 					<a href="#clubMenu" class="nav-header menu-first collapsed" data-toggle="collapse">豪华会所</a>
 					<ul id="clubMenu" class="nav nav-list collapse menu-second">
-						
+
 					</ul>
 					<a href="#houseMenu" class="nav-header menu-first collapsed" data-toggle="collapse">住宅楼盘</a>
 					<ul id="houseMenu" class="nav nav-list collapse menu-second">
-						
+
 					</ul>
 					<a href="#businessMenu" class="nav-header menu-first collapsed" data-toggle="collapse">商业办公</a>
 					<ul id="businessMenu" class="nav nav-list collapse menu-second">
-						
+
 					</ul>
 					<a href="#hotelMenu" class="nav-header menu-first collapsed" data-toggle="collapse">酒店空间</a>
 					<ul id="hotelMenu" class="nav nav-list collapse menu-second">
-						
+
 					</ul>
 				</div>
 				<div class="Thumbnail col-lg-10 col-sm-9 col-xs-9 fifthItem">
-					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="1" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-xs-4" data-project="2" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class=" col-xs-4" data-project="3" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="4" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="5" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="6" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="7" alt="图片无法读取" />
-					<img src="img/缩略图/1.jpg" class="col-lg-4 col-sm-4 col-xs-4" data-project="8" alt="图片无法读取" />
+
 				</div>
 				<div class="sixthItem">
 					<div class="arrows">
@@ -855,7 +848,7 @@
 				//焦点按钮选定时形态改变
 			this.init = function(time) {
 				self.controler(this.buttons);
-				self.begin(time);
+				//self.begin(time);
 			}
 			this.stop = function() {
 				clearInterval(self.timer);
@@ -882,6 +875,10 @@
 				})
 			}
 		}
+		var dataSix = null;
+		//六级目录的数据
+		var num = null;
+		//六级目录当前显示的项目序号
 		var config = {
 			"首页": {},
 			"关于达遂": {
@@ -917,7 +914,7 @@
 					position: 1,
 					bg: "img/蜂巢/项目巡礼/1.png"
 				},
-				"会所售楼部": {
+				"豪华会所": {
 					URL: "#clubMenu",
 					position: 2,
 					bg: "img/蜂巢/项目巡礼/5.png"
@@ -1086,38 +1083,41 @@
 				if (x == target) {
 					source.hide();
 					Item.show();
-					ajaxForfifthItem(function (data) {
-						var config = {
+					ajaxForfifthItem(x, function(num, data) {
+						var sortconfig = {
 							"别墅": "villaMeun",
 							"住宅": "houseMenu",
 							"酒店": "hotelMenu",
 							"会所": "clubMenu",
 							"商业": "businessMenu"
-							
 						}
 						var sort;
 						//建筑类型名字
 						var project;
 						//项目名称
-						for (var i = 0; i<data.length; i++) {
-							sort = 	data[i].name;
+						for (var i = 0; i < data.length; i++) {
+							sort = data[i].name;
 							project = data[i].project;
-							$("#"+config[sort]).html(" ");
-							for (var j = 0;j<project.length;j++) {
-								$("#"+config[sort]).append($("<li>"+project[j].name+"</li>"));
+							$("#" + sortconfig[sort]).html(" ");
+							if (config[num].URL === "#" + sortconfig[sort]) {
+								$(".Thumbnail").html(" ");
+								dataSix = project;
+								for (var j = 0; j < project.length; j++) {
+									getThumbnail($(".Thumbnail"), project[j], j);
+								}
+							}
+							for (var j = 0; j < project.length; j++) {
+								$("#" + sortconfig[sort]).append($("<li>" + project[j].name + "</li>"));
 							}
 						}
 						$('.fifthItem').show();
 					});
-					
 					$('.sixthItem').hide();
 					Item.find("a").map(function() {
 						if ($(this).attr("href") == config[x].URL) {
 							//检测其他标签是否打开，打开的收回
-							$(this).trigger("click").siblings("a").map(function () {
-								console.log($(this).attr("aria-expanded"),$(this).attr("aria-expanded") == "true");
-								if($(this).attr("aria-expanded") == "true") {
-									console.log(this);
+							$(this).trigger("click").siblings("a").map(function() {
+								if ($(this).attr("aria-expanded") == "true") {
 									$(this).trigger("click");
 								}
 							});
@@ -1126,13 +1126,65 @@
 				}
 			}
 		}
-		$('.Thumbnail>img').click(function(e) {
+		var click = 0;
+		//当前点击状态 1 程序触发，0人工触发
+		$(".fifthItem a").click(function(e) {
+			if (click == 1) {
+				click = 0;
+			} else {
+				for (var x in config["项目巡礼"]) {
+					if (x == $(e.target).text()) {
+						ajaxForfifthItem($(e.target).text(), function(num, data) {
+							var sortconfig = {
+								"别墅": "villaMeun",
+								"住宅": "houseMenu",
+								"酒店": "hotelMenu",
+								"会所": "clubMenu",
+								"商业": "businessMenu"
+							}
+							var sort;
+							//建筑类型名字
+							var project;
+							//项目名称
+							for (var i = 0; i < data.length; i++) {
+								sort = data[i].name;
+								project = data[i].project;
+								$("#" + sortconfig[sort]).html(" ");
+								
+								if (config["项目巡礼"][num].URL === "#" + sortconfig[sort]) {
+									$(".Thumbnail").html(" ");
+									dataSix = project;
+									for (var j = 0; j < project.length; j++) {
+										getThumbnail($(".Thumbnail"), project[j], j);
+									}
+								}
+								for (var j = 0; j < project.length; j++) {
+									$("#" + sortconfig[sort]).append($("<li>" + project[j].name + "</li>"));
+								}
+							}
+						});
+					}
+				}
+				$(e.target).siblings("a").map(function() {
+				if ($(this).attr("aria-expanded") == "true") {
+					click = 1;
+					$(this).trigger("click");
+				}
+			});
+			}
+			
+		})
+		$('.Thumbnail').click(function(e) {
 			//getSixthItem();
-			getSixthItem(e.toElement, null, $(".sixthItem"), $(".fifthItem"));
+			getSixthItem(e.target, dataSix, $(".sixthItem"), $(".fifthItem"));
 		})
 
 		function getSixthItem(target, config, Item, source) {
-			//$(target).attr("data-project")
+			var baseUrl = "http://dasui.youbookee.com/";
+			num = $(target).attr("data-project");
+			Item.find(".picture>img").attr("src", baseUrl + config[num].images);
+			Item.find(".introduction").text($(config[num].content).text());
+			$("#projectCheck-guide dl").append("<dt>" + config[num].name + "></dt>");
 			Item.show();
 			source.hide();
 		}
@@ -1144,11 +1196,14 @@
 			var text = target.innerText.slice(0, -1);
 			if (text === "首页") {
 				$('#main').trigger('click');
+				$("#projectCheck-guide dl").find(":last-child").remove();
 			} else if (text === "项目巡礼") {
 				$('.fifthItem').show();
 				$('.sixthItem').hide();
+				$("#projectCheck-guide dl").find(":last-child").remove();
 			}
 		}
+
 		function setProjectGuide(target) {
 			var text = target.innerText.slice(0, -1);
 			if (text === "首页") {
@@ -1158,6 +1213,7 @@
 				$('.sixthItem').hide();
 			}
 		}
+
 		function getIframe(target, config, Item, source) {
 			for (var y = 0; y < config.length; y++) {
 				for (var x in config[y]) {
@@ -1170,41 +1226,78 @@
 			}
 		}
 		$("#arrowleft").click(function() {
-			$(".content").hide(300);
-			changeContent($(".content"), "img/轮播/2.jpg", "asidoghosaidgh");
-			$(".content").show(300);
+			if (num == 0) {} else {
+				num--;
+				$(".content").hide(300);
+				changeContent($(".content"), dataSix[num].images, $(dataSix[num].content).text());
+				$(".content").show(300);
+			}
 		});
 		$("#arrowright").click(function() {
-			$(".content").hide(300);
-			changeContent($(".content"), "img/轮播/2.jpg", "asidoghosaidgh");
-			$(".content").show(300);
+			if (num < dataSix.length - 1) {
+				num++;
+				$(".content").hide(300);
+				changeContent($(".content"), dataSix[num].images, $(dataSix[num].content).text());
+				$(".content").show(300);
+			}
 		})
 
 		function changeContent(target, picture, text) {
+			var baseUrl = "http://dasui.youbookee.com/";
 			if (target) {
-				target.find(".picture img").attr('src', picture);
+				target.find(".picture img").attr('src', baseUrl + picture);
 				target.find(".introduction").text(text);
 			} else {
 				throw "can not get target";
 			}
 		}
-		function ajaxForfifthItem (callback) {
-			try{
+		//获取五级目录 参数：当前显示的项目类名 获取后的处理
+		function ajaxForfifthItem(num, callback) {
+			try {
 				$.ajax({
-					type:"get",
-					url:"http://api.johannlai.com/categories",
-					async:true,
-					success: function (e) {
+					type: "get",
+					url: "http://api.johannlai.com/categories",
+					async: true,
+					success: function(e) {
 						//console.log(e);
-						callback(e)
+						callback(num, e);
 					}
 				});
-			}catch(e){
+			} catch (e) {
 				//TODO handle the exception
 			}
 		}
-		function ajaxForsixthItem () {
-			 
+		//获取来的数据转化为节点
+		function buildFragment(target) {
+			return $(target);
+		}
+		//生成缩略图
+		function getThumbnail(target, source, num) {
+			//图片所在域名
+			var baseUrl = "http://dasui.youbookee.com/";
+			try {
+				if (source) {
+					target.append($("<img src=" + baseUrl + source.images + " class=\"col-lg-4 col-sm-4 col-xs-4\" data-project=" + num + " title=" + source.name + " alt=\"图片无法读取\" ></img>"));
+				}
+			} catch (e) {
+				//TODO handle the exception
+			}
+		}
+
+		function ajaxForsixthItem(num, callback) {
+			try {
+				$.ajax({
+					type: "get",
+					url: "http://api.johannlai.com/categories",
+					async: true,
+					success: function(e) {
+						//console.log(e);
+						callback(num, e);
+					}
+				});
+			} catch (e) {
+				//TODO handle the exception
+			}
 		}
 	</script>
 
