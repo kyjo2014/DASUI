@@ -974,7 +974,7 @@
 					position = config[target][z].position - 1;
 					$('.box-' + order[position]).find($(".overlay a")).text(z);
 					$('.box-' + order[position]).find($(".background")).attr("src", config[target][z].bg);
-					$('.box-' + order[position]).css("display", "inline-block");
+					$('.box-' + order[position]).load().css("display", "inline-block");
 				}
 			});
 		}
