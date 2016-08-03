@@ -893,7 +893,7 @@
 					bg: "img/蜂巢/3.jpg"
 				},
 				"发展历程": {
-					URL: "history.html",
+					URL: "dev.html",
 					position: 3,
 					bg: "img/蜂巢/4.jpg"
 				},
@@ -1213,14 +1213,16 @@
 				$('.sixthItem').hide();
 			}
 		}
-
+		/*
+		 * 修改弹出页的内容
+		 */
 		function getIframe(target, config, Item, source) {
 			for (var y = 0; y < config.length; y++) {
 				for (var x in config[y]) {
 					if (x == target) {
 						source.hide();
 						Item.attr('src', config[y][x].URL);
-						Item.show();
+						Item.animate({ height: "toggle"},'slow');
 					}
 				}
 			}
