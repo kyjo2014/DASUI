@@ -809,7 +809,7 @@
 		<div class="footer">
 
 		</div>
-		<iframe class="seventhItem" src="contact.html" width="100%" height="100%" style="position: absolute; z-index: 3;top: 0px;left: 0px;"></iframe>
+		<iframe class="seventhItem" src="contact.html" width="100%" height="100%" style="height: 0px; position: absolute; z-index: 3;top: 0px;left: 0px;"></iframe>
 	</body>
 	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/jquery.mousewheel.min.js" type="text/javascript" charset="utf-8"></script>
@@ -1222,7 +1222,12 @@
 					if (x == target) {
 						source.hide();
 						Item.attr('src', config[y][x].URL);
-						Item.animate({ height: "toggle"},'slow');
+						Item.load(function () {
+							//Item.animate({  },'slow');
+							Item.css({height:"0px"});
+							Item.animate({height: "100%"},'slow').show();
+						})
+						
 					}
 				}
 			}
