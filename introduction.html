@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -10,11 +11,115 @@
 			
 			body {
 				background-color: white;
-				min-width: 1024px;
+				min-width: 1496px;
 				height: inherit;
 				overflow-y: hidden;
+				margin: 0;
 			}
+			
+			.container {
+				height: 100%;
+				position: relative;
+			}
+			
+			.wrap {
+				display: inline-block;
+				position: relative;
+			}
+			
+			.wrap-left {
+				width: 67%;
+				height: 100%;
+				background-image: url(img/公司介绍/building_bg.png);
+				background-size: auto 100%;
+				background-repeat: no-repeat;
+				vertical-align: top;
+			}
+			
+			.wrap-right {
+				width: 32%;
+				overflow: hidden;
+			}
+			
+			#icon {
+				width: 35%;
+				display: inline-block;
+				margin-top: 10%;
+				margin-left: 60%;
+				margin-bottom: 10%;
+			}
+			
+			#icon>img {
+				width: 100%;
+			}
+			
+			h1,
+			h2,
+			h3 {
+				font-family: "微软雅黑";
+				color: #100964;
+			}
+			
+			h1 {
+				font-size: 36px;
+			}
+			
+			h2 {
+				font-size: 24px;
+			}
+			
+			h3 {
+				font-size: 15px;
+				font-family: "华文仿宋";
+			}
+			
+			article {
+				font-size: 15px;
+				font-family: "华文仿宋";
+			}
+			p {
+				text-indent: 2em;
+			}
+			p:nth-child(1) {
+				margin-bottom: 0px;
+			}
+			p:nth-child(n + 2) {
+				margin-bottom: 0px;
+				margin-top: 0px;
+			}
+		</style>
 	</head>
+
 	<body>
+		<div class="container">
+			<div class="wrap wrap-left">
+				<div class="cover" id="tri-left"></div>
+				<div class="cover" id="tri-right"></div>
+			</div>
+			<div class="wrap wrap-right">
+				<div id="icon">
+					<img src="img/icon-withtitle.png" />
+				</div>
+				<article>
+					<h2>
+						关于我们
+					</h2>
+					<h1>达遂装饰工程有限公司</h1>
+					<h3>ABOUT US</h3>
+					<div class="content">
+						<p>
+							广州达遂装饰工程有限公司,是一家以室内装饰为主体，集设计、施工、材料加工、修缮服务于一体的专业化装饰企业，是国家建设部核准的建筑装修装饰工程专业承包贰级资质企业，涉及领域有高端住宅楼盘、豪宅别墅、时尚写字楼办公室、星级酒店、餐饮会所。
+						</p> 
+						<p>
+							达遂的精英团队，现有各种工程技术人员约百余人，其中国家一级注册建造师、注册结构工程师、注册造价工程师、中高级工程师、高级室内设计师多达50余人，先后有30余人次被评为“全国优秀建筑装饰项目经理”，10余人次被评为“全国建筑工程装饰奖设计师”。这些优秀人才成为保证工程质量、进行技术创新、打造公司卓越品牌的关键力量。
+						</p>
+						<p>
+							公司拥有完善的采购供应链管理平台，与多家产业链上的重要企业建立了战略伙伴关系，并先后成立了南洲木器加工和不锈钢工艺玻璃两大生产基地，为公司业务的扩展提供了全方位的有效支持，进一步保证了施工品质和工厂化生产—装配化施工程序符合自身高要求的企业标准。 　　历经十三载耕耘，公司业务呈现出持续、跨越竞争的发展，具备了为客户提供更高水平服务的基础。达遂将会以先进的企业文化和更科学化、规范化、专业化、精细化的管理理念，竭诚为客户提供完美服务，与客户合力共创价值。
+						</p>
+					</div>
+				</article>
+			</div>
+		</div>
 	</body>
+
 </html>
